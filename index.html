@@ -915,7 +915,7 @@ Going forward &lt;code&gt;application/xml&lt;/code&gt; will become depreciated, 
 <h6 id="_response_200"><a class="anchor" href="#_response_200"></a>Response 200</h6>
 <div class="listingblock">
 <div class="content">
-<pre>// // Note: The event property in the response markup contains a complete, // self-contained description for the event. // // Event: streamConnectEvent
+<pre>// Event: streamConnectEvent
 {
     "deployr": {
         "response": {
@@ -970,8 +970,7 @@ Going forward &lt;code&gt;application/xml&lt;/code&gt; will become depreciated, 
         }
     }
 }
-
-// // Event: executionConsoleEvent (error) // // A non-null error property indicates an R error. //
+// Event: executionConsoleEvent (error)
 {
     "deployr": {
         "response": {
@@ -1063,8 +1062,7 @@ Going forward &lt;code&gt;application/xml&lt;/code&gt; will become depreciated, 
         }
     }
 }
-// // Management Event Stream events follow: //
-// // Event: gridActivityEvent // // The isLive property indicates activity start or stop. //
+// Event: gridActivityEvent
 {
     "deployr": {
         "response": {
@@ -1085,7 +1083,7 @@ Going forward &lt;code&gt;application/xml&lt;/code&gt; will become depreciated, 
         }
     }
 }
-// // Event: gridWarningEvent // // The errorcode property indicates the specific warning. //
+// Event: gridWarningEvent
 {
     "deployr": {
         "response": {
@@ -1102,7 +1100,7 @@ Going forward &lt;code&gt;application/xml&lt;/code&gt; will become depreciated, 
         }
     }
 }
-// // Event: gridHeartbeatEvent // // Each node on the grid has an entry in the list found // on the nodes property. // // The slotactivity property on each node details the // current slot activity for that node. // // The "active" property on each node indicates if the // grid node is currently responsive. If false, the node // is temporarily out-of-service. //
+// Event: gridHeartbeatEvent
 {
     "deployr": {
         "response": {
@@ -1185,7 +1183,7 @@ Going forward &lt;code&gt;application/xml&lt;/code&gt; will become depreciated, 
     }
 }
 
-// // Event: securityLoginEvent (failure) // // A non-null error property indicates login failure. //
+// Event: securityLoginEvent (failure)
 {
     "deployr": {
         "response": {
