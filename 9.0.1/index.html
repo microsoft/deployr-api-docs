@@ -39,6 +39,7 @@
       </div>
         <ul class="toc-footer">
                 <li><a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Back to MSDN documentation</a>  </li>
+                <li><a href="./swagger/rserver-swagger-9.0.1.json" target="_blank">Download swagger file</a>  </li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -55,6 +56,8 @@
 <h3 id="license-information">License information</h3>
 <p><em>License</em> : <a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Copyright (C) Microsoft Corporation. All rights reserved.</a></p>
 </blockquote>
+<h3 id="swagger">Swagger</h3>
+<p>Download the <a href="./swagger/rserver-swagger-9.0.1.json" target="_blank">swagger</a> spec file for these APIs</p>
 <h3 id="uri-scheme">URI scheme</h3>
 <p><em>Schemes</em>: http, https</p>
 <h3 id="consumes">Consumes</h3>
@@ -200,7 +203,7 @@
 </ul>
 <h2 id="delete-user-access-token">Delete User Access Token</h2>
 <h3 id="path">Path</h3>
-<p>DELETE  /login/refreshToken/{refreshToken}</p>
+<p>DELETE  /login/refreshToken</p>
 <h3 id="description">Description</h3>
 <p>The user revokes a refresh token.</p>
 <blockquote>
@@ -228,7 +231,7 @@
 </thead>
 <tbody>
 <tr>
-<td><strong>path</strong></td>
+<td><strong>query</strong></td>
 <td><strong>refreshToken</strong> <br><span class="property-required">required</span></td>
 <td>The refresh token to be revoked</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
@@ -1458,7 +1461,7 @@
 <blockquote>
 <p>Example Request </p>
 </blockquote>
-<pre><code class="highlight json">
+<pre><code class="highlight json">binary
 </code></pre>
 <h3 id="method">Method</h3>
 <p>POST</p>
