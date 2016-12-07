@@ -47,7 +47,8 @@
         <div class="content">
           <h1 id="overview">Overview</h1>
 <p><span style="font-size:20px;">Core Operationalization APIs</span></p>
-<p>Integration technology for deploying R analytics inside web, desktop, mobile,<br>and dashboard applications as well as backend systems. Turn your R scripts<br>into analytics web services, so R code can be easily executed by applications<br>running on a secure server.</p>
+<p>Integration technology for deploying R analytics inside web, desktop, mobile, and dashboard applications as well as backend systems. Turn your R scripts into analytics web services, so R code can be easily executed by applications running on a secure server.</p>
+<p>The core R Server operationalization APIs can be grouped into several categories, including: <a href="#authentication-apis">Authentication</a>, <a href="#services-management-apis">Web Services</a>, <a href="#session-apis">Sessions</a>, <a href="#snapshot-apis">Snapshots</a>, and <a href="#status-apis">Status</a>.</p>
 <blockquote>
 <h3 id="external-documentation">External Documentation</h3>
 <p><a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Back to MSDN documentation</a></p>
@@ -69,7 +70,9 @@
 <li><code>application/json</code></li>
 </ul>
 <h1 id="authentication-apis">Authentication APIs</h1>
-<p>The &#x60;authentication&#x60; APIs provide authentication related operations and access<br>workflow features.</p>
+<p>The &#x60;authentication&#x60; APIs provide authentication related operations and access workflow features.</p>
+<p>All operationalization API calls must be authenticated using the &#x60;POST /login&#x60; API or through Azure Active Directory.</p>
+<p>If you use the &#x60;POST /login&#x60; API, R Server will issue you a <a href="https://msdn.microsoft.com/en-us/microsoft-r/operationalize/security-access-tokens">bearer/access token</a>. This bearer token is a lightweight security token that grants the “bearer” access to a protected resource, in this case, R Server&#x27;s core operationalization APIs. Once a user has been authenticated, the application must validate the user’s bearer token to ensure that authentication was successful for the intended parties. If your organization uses Azure Active Directory, then AAD will issue the token.</p>
 <h2 id="login-user">Login User</h2>
 <h3 id="path">Path</h3>
 <p>POST  /login</p>
@@ -260,15 +263,22 @@
 <li><code>401</code> - Unauthorized (invalid or expired refresh token) </li>
 </ul>
 <h1 id="services-management-apis">Services Management APIs</h1>
-<p>The &#x60;services&#x60; APIs provide the functionality to manage web service:</p>
+<p>The core Web Services APIs facilitate the publishing and management of user-defined analytic web services, including:</p>
 <ul>
-<li>Creation</li>
-<li>Deletion</li>
-<li>Updating</li>
-<li>Listing</li>
-<li>Discovery</li>
+<li>Create</li>
+<li>Delete</li>
+<li>Update</li>
+<li>List</li>
+<li>Discover</li>
 </ul>
 <p><strong>Note:</strong> For service consumption, please see the &#x60;/api&#x60; APIs</p>
+<p>An R Server web service is a stateless execution in an R shell on the compute node. Each web service is uniquely defined by a &#x60;name&#x60; and &#x60;version&#x60; for easy service consumption and meaningful machine-readable discovery approaches.</p>
+<p>These RESTful APIs for web services provide programmatic access to a service&#x27;s lifecycle. The APIs are straightforward, easy-to-use, and when composed together, can form the foundation for more expressive operations.</p>
+<p>Web services can be versioned to improve the release of services for service authors and make it easier for consumers to identify the services they are calling.  Service versioning is an important part of the publishing process and is designed to be flexible without naming restrictions. We highly recommend the adoption of meaningful and standard versioning conventions such as <a href="http://semver.org/">semantic versioning</a>.</p>
+<p>If a web service is published without a version &#x60;GET /services/{name}&#x60;, a Globally Unique Identifier (GUID) will be created as a unique reference number to represent a version. Since the GUID is not a meaningful version number, the intention is allow an author to treat the service as a <em>development</em> version (seen only by the author) until it is ready to be promoted and shared. From there, a more meaningful version number can be chosen during service publishing to represent a stable release.</p>
+<p>Whenever a web service is published &#x60;POST /services/{name}/{version}&#x60;, an endpoint is registered &#x60;/api/{name}/{version}&#x60;, which in turn triggers the generation of a custom <a href="http://swagger.io">Swagger</a>-based JSON file. <a href="https://msdn.microsoft.com/en-us/microsoft-r/operationalize/api-client-libraries">Learn more about consuming web services</a>.</p>
+<p>If you use a snapshot when developing your web service, the session snapshot information will be baked into the service API when published and available to any authenticated user consuming that web service later.</p>
+<p>Please note that while only the web service author can update, publish, or delete a service, any authenticated user can retrieve a list of services or consume a service.</p>
 <h2 id="get-services">Get Services</h2>
 <h3 id="path">Path</h3>
 <p>GET  /services</p>
@@ -775,7 +785,7 @@
 <li><code>404</code> - Not Found (service not found) </li>
 </ul>
 <h1 id="service-consumption-apis">Service Consumption APIs</h1>
-<p>The &#x60;service api&#x60; APIs provide operations for obtaining the &#x60;swagger&#x60; service holding<br>and capabilities for a specific published web service. From this, analytic web<br>service consumption can take place.</p>
+<p>The &#x60;service api&#x60; APIs provide operations for obtaining the &#x60;swagger&#x60; service holding and capabilities for a specific published web service. From this, analytic web service consumption can take place.</p>
 <h2 id="get-api-swagger">Get API Swagger</h2>
 <h3 id="path">Path</h3>
 <p>GET  /api/{name}/{version}/swagger.json</p>
@@ -839,19 +849,14 @@
 <li><code>404</code> - Not Found (Web service not found)  </li>
 </ul>
 <h1 id="session-apis">Session APIs</h1>
-<p>The &#x60;sessions&#x60; APIs provide functionality for R session management:</p>
+<p>The &#x60;sessions&#x60; APIs provide functionality for R session management, which can be divided into the following groups:</p>
 <ul>
-<li>Session:<ul>
-<li>Creation</li>
-<li>Deletion</li>
-<li>Updating</li>
-<li>Listing</li>
-<li>Console-Output</li>
-<li>History</li>
+<li>&#x60;Session lifecycle APIs&#x60; help manage the R session lifecycle.</li>
+<li>&#x60;Session workspace APIs&#x60; help manage the objects in your workspace.</li>
+<li>&#x60;Session working directory APIs&#x60; help manage the files in your workspace.</li>
+<li>&#x60;Session snapshot APIs&#x60; help create and manage session snapshots. More snapshot APIs are covered in the next section.</li>
 </ul>
-</li>
-<li>Workspace and working directory file management</li>
-</ul>
+<p>A session is an interactive stateful R session that is run in an R shell on the compute node. A session is managed by R Server on behalf of the application.</p>
 <h2 id="create-session">Create Session</h2>
 <h3 id="path">Path</h3>
 <p>POST  /sessions</p>
@@ -1884,7 +1889,9 @@
 <li><code>404</code> - Not Found (session not found) </li>
 </ul>
 <h1 id="snapshot-apis">Snapshot APIs</h1>
-<p>The &#x60;snapshots&#x60; APIs provide different operations to access and manage<br>workspace <em>snapshot</em> checkpoints.</p>
+<p>These APIs provide different operations to access and manage workspace snapshots. A snapshot is a prepared environment image of a R session saved to Microsoft R Server, which includes the session&#x27;s R packages, R objects and data files. </p>
+<p>For optimal performance, consider the size of the snapshot carefully especially when publishing a service. Before creating a snapshot, ensure that you keep only those workspace objects you need and purge the rest.  And, in the event that you only need a single object, consider passing that object alone itself instead of using a snapshot. </p>
+<p>A snapshot can be loaded into any subsequent remote R session for the user who created it.  For example, suppose you want to execute a script that needs three R packages, a reference data file, and a model object.   Instead of loading these items each time you want to execute the script, create a snapshot of an R session containing them. Then, you can save time later by loading this snapshot using its ID to get the session contents exactly as they were at the time the snapshot was created.</p>
 <h2 id="get-snapshots">Get Snapshots</h2>
 <h3 id="path">Path</h3>
 <p>GET  /snapshots</p>
@@ -2010,7 +2017,7 @@
 <li><code>404</code> - Not Found (snapshot not found) </li>
 </ul>
 <h1 id="status-apis">Status APIs</h1>
-<p>The &#x60;status&#x60; APIs provide different system health related details.</p>
+<p>You can retrieve the &#x27;raw details&#x27; on the health of the system using the &#x60;GET /status&#x60; API call.</p>
 <h2 id="get-status">Get Status</h2>
 <h3 id="path">Path</h3>
 <p>GET  /status</p>
