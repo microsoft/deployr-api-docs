@@ -1,0 +1,1836 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "DeployRClient",
+        "description": "Integration technology for deploying R analytics inside web, desktop, mobile, \nand dashboard applications as well as backend systems. Turn your R scripts \ninto analytics web services, so R code can be easily executed by applications \nrunning on a secure server.\n",
+        "version": "9.0.1",
+        "termsOfService": "https://go.microsoft.com/fwlink/?linkid=836356",
+        "license": {
+            "name": "Copyright (C) Microsoft Corporation. All rights reserved.",
+            "url": "https://go.microsoft.com/fwlink/?linkid=836356"
+        }
+    },
+    "externalDocs": {
+        "description": "Complete documentation",
+        "url": "https://go.microsoft.com/fwlink/?linkid=836356"
+    },
+    "tags": [
+        {
+            "name": "Authentication APIs",
+            "description": "The `authentication` APIs provide authentication related operations and access \nworkflow features."
+        },
+        {
+            "name": "Services Management APIs",
+            "description": "The `services` APIs provide the functionality to manage web service:\n- Creation\n- Deletion\n- Updating\n- Listing\n- Discovery\n\n**Note:** For service consumption, please see the `/api` APIs"
+        },
+        {
+            "name": "Service Consumption APIs",
+            "description": "The `service api` APIs provide operations for obtaining the `swagger` service holding \nand capabilities for a specific published web service. From this, analytic web \nservice consumption can take place.\n"
+        },
+        {
+            "name": "Session APIs",
+            "description": "The `sessions` APIs provide functionality for R session management:\n- Session:\n  - Creation\n  - Deletion\n  - Updating\n  - Listing\n  - Console-Output\n  - History\n- Workspace and working directory file management"
+        },
+        {
+            "name": "Snapshot APIs",
+            "description": "The `snapshots` APIs provide different operations to access and manage \nworkspace *snapshot* checkpoints."
+        },
+        {
+            "name": "Status APIs",
+            "description": "The `status` APIs provide different system health related details."
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "summary": "Login User",
+                "description": "Logs the user in",
+                "operationId": "login",
+                "tags": [
+                    "Authentication APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "loginRequest",
+                        "in": "body",
+                        "description": "Login properties for athentication",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AccessTokenResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "token_type": "Bearer",
+                                "access_token": "eyJhbGciOiJSUzUxMiIsInR5cC",
+                                "expires_in": 3600,
+                                "expires_on": 1479664807,
+                                "refresh_token": "ScW2tnhl4Oi7ksHLj/TI"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized (invalid credentials)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/login/refreshToken": {
+            "post": {
+                "summary": "Refresh User Access Token",
+                "description": "The user renews access token and refresh token.",
+                "operationId": "renewToken",
+                "tags": [
+                    "Authentication APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "renewTokenRequest",
+                        "in": "body",
+                        "description": "Renew access token properties for athentication",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RenewTokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AccessTokenResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "token_type": "Bearer",
+                                "access_token": "eyJhbGciOiJSUzUxMiIsInR5cC",
+                                "expires_in": 3600,
+                                "expires_on": 1479664807,
+                                "refresh_token": "ScW2tnhl4Oi7ksHLj/TI"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized (invalid or expired refresh token)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete User Access Token",
+                "description": "The user revokes a refresh token.",
+                "operationId": "revokeRefreshToken",
+                "tags": [
+                    "Authentication APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "refreshToken",
+                        "in": "query",
+                        "description": "The refresh token to be revoked",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/AccessTokenResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "token_type": "Bearer",
+                                "access_token": "eyJhbGciOiJSUzUxMiIsInR5cC",
+                                "expires_in": 3600,
+                                "expires_on": 1479664807,
+                                "refresh_token": "ScW2tnhl4Oi7ksHLj/TI"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized (invalid or expired refresh token)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/services": {
+            "get": {
+                "summary": "Get Services",
+                "description": "Lists all the published services.",
+                "operationId": "getAllWebServices",
+                "tags": [
+                    "Services Management APIs"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/WebService"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "creationTime": "2016-11-20T18:15:09.917656",
+                                    "name": "addition",
+                                    "version": "v1.0.0",
+                                    "description": "Addition Service",
+                                    "code": "result <- x + y",
+                                    "snapshotId": "8fac71e8-92a9-4959-a679-4376e5aab20d",
+                                    "owner": "deployruser",
+                                    "operationId": "add",
+                                    "inputParameterDefinitions": [
+                                        {
+                                            "name": "x",
+                                            "type": "numeric"
+                                        },
+                                        {
+                                            "name": "y",
+                                            "type": "numeric"
+                                        }
+                                    ],
+                                    "outputParameterDefinitions": [
+                                        {
+                                            "name": "result",
+                                            "type": "numeric"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/services/{name}": {
+            "post": {
+                "summary": "Create Service by `name`",
+                "description": "Publish the web services for the logged in user with given name and a unique version.",
+                "operationId": "publishWebService",
+                "tags": [
+                    "Services Management APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name of the published web service.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "publishRequest",
+                        "in": "body",
+                        "required": true,
+                        "description": "Publish Web Service request details.",
+                        "schema": {
+                            "$ref": "#/definitions/PublishWebServiceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "string"
+                        }              
+                    },
+                    "default": {
+                        "description": "* `400` - Bad Request \n* `401` - Unauthorized\n* `403` - Forbidden (another user owns this service and you are not authorized to publish to it)\n* `409` - Conflict (another web service with same name and version exists. Use patch request if you want to update)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Service by `name`",
+                "description": "Lists all the published services with the provided `name`.",
+                "operationId": "getAllWebServiceVersionsByName",
+                "tags": [
+                    "Services Management APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name of the published web service.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/WebService"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "creationTime": "2016-11-20T18:15:09.917656",
+                                    "name": "addition",
+                                    "version": "v1.0.0",
+                                    "description": "Addition Service",
+                                    "code": "result <- x + y",
+                                    "snapshotId": "8fac71e8-92a9-4959-a679-4376e5aab20d",
+                                    "owner": "deployruser",
+                                    "operationId": "add",
+                                    "inputParameterDefinitions": [
+                                        {
+                                            "name": "x",
+                                            "type": "numeric"
+                                        },
+                                        {
+                                            "name": "y",
+                                            "type": "numeric"
+                                        }
+                                    ],
+                                    "outputParameterDefinitions": [
+                                        {
+                                            "name": "result",
+                                            "type": "numeric"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/services/{name}/{version}": {
+            "post": {
+                "summary": "Create Service by `name` and `version`",
+                "description": "Publish the web service for the logged in user with given name and version.",
+                "operationId": "publishWebServiceVersion",
+                "tags": [
+                    "Services Management APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name of the published web service",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "version of the published web service.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "publishRequest",
+                        "in": "body",
+                        "required": true,
+                        "description": "Publish Service request details.",
+                        "schema": {
+                            "$ref": "#/definitions/PublishWebServiceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400` - Bad request\n* `401` - Unauthorized\n* `403` - Forbidden (another web service with same name and version exists. Use patch request if you want to update)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Patch Service",
+                "description": "Updates the published service.",
+                "operationId": "patchWebServiceVersion",
+                "tags": [
+                    "Services Management APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name of the published web service",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "version of the published web service",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "patchRequest",
+                        "in": "body",
+                        "required": true,
+                        "description": "Publish Web Service request details.",
+                        "schema": {
+                            "$ref": "#/definitions/PublishWebServiceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400` - Bad Request\n* `401` - Unauthorized\n* `403` - Forbidden (service with that name and version is owned by a different user, only the owner can update it)\n* `404` - Not Found (web service not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Service by `name` and `version`",
+                "description": "Lists all the published services with the provided `name` and `version`.",
+                "operationId": "getWebServiceVersion",
+                "tags": [
+                    "Services Management APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name of the published web service",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "version of the published web service",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/WebService"
+                            }
+                        },
+                        "examples": {
+                            "application/json": {
+                                "creationTime": "2016-11-20T18:15:09.917656",
+                                "name": "addition",
+                                "version": "v1.0.0",
+                                "description": "Addition Service",
+                                "code": "result <- x + y",
+                                "snapshotId": "8fac71e8-92a9-4959-a679-4376e5aab20d",
+                                "owner": "deployruser",
+                                "operationId": "add",
+                                "inputParameterDefinitions": [
+                                    {
+                                        "name": "x",
+                                        "type": "numeric"
+                                    },
+                                    {
+                                        "name": "y",
+                                        "type": "numeric"
+                                    }
+                                ],
+                                "outputParameterDefinitions": [
+                                    {
+                                        "name": "result",
+                                        "type": "numeric"
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Service",
+                "description": "Deletes the published web service for the logged in user.",
+                "operationId": "deleteWebServiceVersion",
+                "tags": [
+                    "Services Management APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name of the published web service",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "version of the published web service",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `403` - Forbidden (service with that name and version is owned by a different user, only the owner can delete it guid) \n* `404` - Not Found (service not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/{name}/{version}/swagger.json": {
+            "get": {
+                "summary": "Get API Swagger",
+                "description": "Returns a _Swagger_ `swagger.json` describing a published web service's API capabilities.",
+                "operationId": "GetWebServiceSwagger",
+                "tags": [
+                    "Service Consumption APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name of the published web service.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "version",
+                        "in": "path",
+                        "description": "version of the published web service.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SwaggerJsonResponse"
+                        }
+                    },
+                    "default": {
+                        "description": "* `400` - Bad request\n* `401` - Unauthorized\n* `404` - Not Found (Web service not found) ",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "swagger": "2.0"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions": {
+            "post": {
+                "summary": "Create Session",
+                "description": "Create a new session.",
+                "operationId": "createSession",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "createSessionRequest",
+                        "in": "body",
+                        "description": "Properties of the new session.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateSessionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Normal case returns the id of the newly created session",
+                        "schema": {
+                            "$ref": "#/definitions/CreateSessionResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "sessionId": "85b1ecd8-f5a5-42ce-87f3-5b7be97665ae"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Sessions",
+                "description": "Lists all existing sessions for the current user.",
+                "operationId": "listSessions",
+                "tags": [
+                    "Session APIs"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The sessions for the current user.",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Session"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                {
+                                    "id": "e052a7f7-8fcd-40b9-b9b8-d351acd44444",
+                                    "name": "mPheQrfoO0LmbLZ",
+                                    "owner": "deployruser"
+                                },
+                                {
+                                    "id": "l0dfsddf-4gjd-40b9-b9b8-sdf98yh99999",
+                                    "name": "mPheQrfoO0LmbLZ",
+                                    "owner": "sean"
+                                }
+                            ]
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}": {
+            "delete": {
+                "summary": "Delete Session",
+                "description": "Close a session and releases all it's associated resources.",
+                "operationId": "closeSession",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session to close.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/force": {
+            "delete": {
+                "summary": "Delete Session by `force`",
+                "description": "Aattempt to _forcefully_ close a session and releases all it's associated resources",
+                "operationId": "closeSessionByForce",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session to close.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/console-output": {
+            "get": {
+                "summary": "Get Console Output",
+                "description": "Returns the console output for the current or last execution",
+                "operationId": "getSessionConsoleOutput",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ConsoleOutputResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "consoleOutput": "[1] 5\r\n"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/history": {
+            "get": {
+                "summary": "Get History",
+                "description": "Lists all history for a specific session",
+                "operationId": "listSessionHistory",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                "model <- glm(formula = am ~ hp + wt, data = mtcars, family = binomial)",
+                                "manualTransmission <- function(hp, wt) { \r\n newdata <- data.frame(hp = hp, wt = wt) \r\npredict(model, newdata, type = \"response\") \r\n}",
+                                "print(manualTransmission(120, 2.8))"
+                            ]
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/files": {
+            "post": {
+                "summary": "Load File",
+                "description": "Loads a file into the R session working directory. The uploaded file name is extracted from the file and if another file with the same name already exists in the working directory, the file will be overwritten.",
+                "operationId": "uploadSessionFile",
+                "tags": [
+                    "Session APIs"
+                ],
+                "produces": [
+                    "text/plain"
+                ],
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "required": true,
+                        "type": "file",
+                        "description": "The file to be uploaded to the workspace."
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Files",
+                "description": "Lists all files of a specific session",
+                "operationId": "listSessionFiles",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                "statscore.csv",
+                                "hist.png",
+                                "notes.Rmd"
+                            ]
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/files/{fileName}": {
+            "get": {
+                "summary": "Get File",
+                "description": "Downloads a file from a session as stream.",
+                "operationId": "getSessionFile",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileName",
+                        "in": "path",
+                        "description": "Name of the file.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "file"
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete File",
+                "description": "Delete a file from a session's working directory.",
+                "operationId": "deleteSessionFile",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fileName",
+                        "in": "path",
+                        "description": "Name of the file.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File is deleted"
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/workspace": {
+            "get": {
+                "summary": "Get Workspace Object Names",
+                "description": "Lists all object names of a specific session",
+                "operationId": "listWorkspaceObjects",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "examples": {
+                            "application/json": [
+                                "model",
+                                "manualTransmission",
+                                "am.glm",
+                                "newdata"
+                            ]
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)\n* `410` - Gone (once live session is now gone)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/workspace/{objectName}": {
+            "post": {
+                "summary": "Create Workspace Object",
+                "description": "Upload a serialized R object into R session, The object has to be serialized using the 'serialize' R function. If an object  with the same name already exists in the workspace, the object  value will be overwritten. Simple R code to serialize an object:\n```R objectInR <- 10 serializedObjectInR <- serialize(objectInR, NULL) connection <- file('binaryFile','wb') POST('http://deployR.example/sessions/sessionId/workspace/objectName', body = connection) ```",
+                "operationId": "setWorkspaceObject",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "objectName",
+                        "in": "path",
+                        "description": "Name of the R object.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "serializedObject",
+                        "in": "body",
+                        "description": "The binary file that contains serialized R object to be uploaded, the binary file Content-Type should be 'application/octet-stream'",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "binary"
+                        }
+                    }
+                ],
+                "consumes": [
+                    "application/octet-stream"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get Workspace Object",
+                "description": "Returns an R object from a session as a `.RData` file stream",
+                "operationId": "getWorkspaceObject",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "objectName",
+                        "in": "path",
+                        "description": "Name of the R object.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "file",
+                            "description": "The RData file stream that contains the Object"
+                        },
+                        "examples": {
+                            "application/octet-stream": "[1] 5b 7b 22 63 72 65 61 74 69 6f 6e 54 69 6d 65 22 3a 22 32 30 31 36 2d 31 31 2d [27] 32 30 54 31 39 3a 35 30 3a 34 39 2e 37 35 32 37 36 37 36 22 2c 22 6e 61 6d 65"
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session or object not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Workspace Object",
+                "description": "Delete an object from a session.",
+                "operationId": "deleteWorkspaceObject",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "objectName",
+                        "in": "path",
+                        "description": "Name of the object.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session or object not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/execute": {
+            "post": {
+                "summary": "Execute Code",
+                "description": "Executes R code in the context of a specific session.",
+                "operationId": "executeCode",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "executeRequest",
+                        "in": "body",
+                        "description": "R code that needs to be executed",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ExecuteRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ExecuteResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "success": true,
+                                "errorMessage": "",
+                                "outputParameters": [],
+                                "consoleOutput": "[1] 5\r\n",
+                                "changedFiles": []
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/snapshot": {
+            "post": {
+                "summary": "Create Snapshot",
+                "description": "Create a snapshot from R session by saving the workspace and all files in the working directory into zip file, the return value will be the created snapshot Id.",
+                "operationId": "CreateSnapshot",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "createSnapshotRequest",
+                        "in": "body",
+                        "description": "Properties of the new snapshot.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateSnapshotRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/CreateSnapshotResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "snapshotId": "8fac71e8-92a9-4959-a679-4376e5aab20d"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/loadsnapshot/{snapshotId}": {
+            "post": {
+                "summary": "Load Snapshot",
+                "description": "Loads a snapshot into R session by merging the workspace of the saved snapshot and target session. It will override the files in the working directory as well.",
+                "operationId": "LoadSnapshot",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "snapshotId",
+                        "in": "path",
+                        "description": "Id of the saved snapshot.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session or snapshot not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/sessions/{id}/cancel": {
+            "post": {
+                "summary": "Cancel Session",
+                "description": "Cancel a session by aborting the current execution operation, afterwards the session will be alive and ready to accept any calls. Cancel session is **not** guaranteed to interrupt the execution",
+                "operationId": "cancelSession",
+                "tags": [
+                    "Session APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the session to cancel.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/snapshots": {
+            "get": {
+                "summary": "Get Snapshots",
+                "description": "List all the snapshots for the current user and display some info such as Id, display name, creation time, zip file size and owner for this snapshot.",
+                "operationId": "ListSnapshots",
+                "tags": [
+                    "Snapshot APIs"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Snapshot"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/snapshots/{id}": {
+            "get": {
+                "summary": "Get Snapshot",
+                "description": "Get the snapshot content as zip file stream (zip file containing the working directory files and the workspace file)",
+                "operationId": "GetSnapshotContent",
+                "tags": [
+                    "Snapshot APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the snapshot.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "file",
+                            "description": "The zip file that contains the '.RData' file as workspace file and all files in the working directory"
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (snapshot not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Snapshot",
+                "description": "Delete a snapshot permanently and also it's content (zip file containing the working directory files and the workspace file)",
+                "operationId": "DeleteSnapshot",
+                "tags": [
+                    "Snapshot APIs"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the snapshot.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `404` - Not Found (snapshot not found)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/status": {
+            "get": {
+                "summary": "Get Status",
+                "description": "Gets the current health of the system.",
+                "operationId": "status",
+                "tags": [
+                    "Status APIs"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/StatusResponse"
+                        },
+                        "examples": {
+                            "application/json": {
+                                "statusCode": "green",
+                                "components": {
+                                    "backends": {
+                                        "statusCode": "green",
+                                        "components": {
+                                            "http://localhost:12805/": {
+                                                "statusCode": "green",
+                                                "components": null,
+                                                "details": {
+                                                    "can Open Shell": true,
+                                                    "can Write": true,
+                                                    "can Read": true,
+                                                    "can Zip": true,
+                                                    "max Pool Size": 80,
+                                                    "active Shell Count": 1,
+                                                    "current Pool Size": 11
+                                                }
+                                            }
+                                        },
+                                        "details": {}
+                                    },
+                                    "database": {
+                                        "statusCode": "green",
+                                        "components": null,
+                                        "details": {
+                                            "name": "main",
+                                            "state": "Open"
+                                        }
+                                    },
+                                    "ldap": {
+                                        "statusCode": "green",
+                                        "components": null,
+                                        "details": {
+                                            "host": "40.118.170.246",
+                                            "port": 636,
+                                            "version": 3
+                                        }
+                                    }
+                                },
+                                "details": {}
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "* `401` - Unauthorized\n* `500` - Internal Server Error (server cannot report its own status)",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Session": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier representing the session."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the session."
+                },
+                "owner": {
+                    "type": "string",
+                    "description": "Owner of the session."
+                }
+            }
+        },
+        "CreateSessionRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the session."
+                },
+                "snapshotId": {
+                    "type": "string",
+                    "description": "Id of the snapshot to be loaded into the new created session."
+                }
+            }
+        },
+        "CreateSessionResponse": {
+            "type": "object",
+            "properties": {
+                "sessionId": {
+                    "type": "string",
+                    "description": "Id of the newly created session."
+                }
+            }
+        },
+        "Snapshot": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier representing the snapshot."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the snapshot."
+                },
+                "owner": {
+                    "type": "string",
+                    "description": "Owner of the snapshot."
+                },
+                "creationTime": {
+                    "type": "string",
+                    "format": "YYYY-mm-dd",
+                    "description": "Creation time of the snapshot."
+                },
+                "contentSize": {
+                    "type": "integer",
+                    "description": "Size of the zip file of the snapshot."
+                }
+            }
+        },
+        "CreateSnapshotRequest": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the snapshot."
+                }
+            }
+        },
+        "CreateSnapshotResponse": {
+            "type": "object",
+            "properties": {
+                "snapshotId": {
+                    "type": "string",
+                    "description": "Id of the created snapshot."
+                }
+            }
+        },
+        "ExecuteRequest": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "R code to execute."
+                },
+                "inputParameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WorkspaceObject"
+                    },
+                    "description": "Input parameters for the execution"
+                },
+                "outputParameters": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Output parameters for the execution"
+                }
+            }
+        },
+        "ExecuteResponse": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "boolean",
+                    "description": "The operation was successful"
+                },
+                "errorMessage": {
+                    "type": "string",
+                    "description": "Errors returned by the execution"
+                },
+                "outputParameters": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/WorkspaceObject"
+                    },
+                    "description": "Output parameters for the execution"
+                },
+                "consoleOutput": {
+                    "type": "string",
+                    "description": "The console output of the execution"
+                },
+                "changedFiles": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "description": "The filename of a modified file"
+                    },
+                    "description": "The filenames of the files modified during execution"
+                }
+            }
+        },
+        "WorkspaceObject": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the workspace object."
+                },
+                "value": {
+                    "type": "object",
+                    "description": "Value of the object as JSON."
+                }
+            }
+        },
+        "ParameterDefinition": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The name of the parameter object."
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "logical",
+                        "numeric",
+                        "integer",
+                        "character",
+                        "vector",
+                        "matrix",
+                        "data.frame"
+                    ],
+                    "x-ms-enum": {
+                        "name": "type",
+                        "modelAsString": true
+                    },
+                    "description": "The type of the parameter object."
+                }
+            }
+        },
+        "LoginRequest": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string",
+                    "description": "The name of the user."
+                },
+                "password": {
+                    "type": "string",
+                    "description": "The password of the user."
+                }
+            }
+        },
+        "RenewTokenRequest": {
+            "type": "object",
+            "properties": {
+                "refreshToken": {
+                    "type": "string",
+                    "description": "A currently valid refresh token."
+                }
+            }
+        },
+        "AccessTokenResponse": {
+            "type": "object",
+            "properties": {
+                "token_type": {
+                    "type": "string"
+                },
+                "access_token": {
+                    "type": "string"
+                },
+                "expires_on": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "link": {
+                    "type": "string"
+                }
+            }
+        },
+        "PublishWebServiceRequest": {
+            "type": "object",
+            "properties": {
+                "snapshotId": {
+                    "type": "string",
+                    "description": "ID of the snapshot to be used for service."
+                },
+                "code": {
+                    "type": "string",
+                    "description": "R code to execute."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description for the web service."
+                },
+                "operationId": {
+                    "type": "string",
+                    "description": "Swagger operationId/alias for web service."
+                },
+                "inputParameterDefinitions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ParameterDefinition"
+                    },
+                    "description": "Input parameters definitions for the execution"
+                },
+                "outputParameterDefinitions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ParameterDefinition"
+                    },
+                    "description": "Output parameter definitions for the execution"
+                }
+            }
+        },
+        "WebService": {
+            "type": "object",
+            "required": [
+                "name",
+                "version"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name of the published service."
+                },
+                "version": {
+                    "type": "string",
+                    "description": "Version of the Published Service."
+                },
+                "creationTime": {
+                    "type": "string",
+                    "description": "Creation time for the service."
+                },
+                "snapshotId": {
+                    "type": "string",
+                    "description": "ID of the snapshot to be used for service."
+                },
+                "code": {
+                    "type": "string",
+                    "description": "R code to execute."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the web service."
+                },
+                "operationId": {
+                    "type": "string",
+                    "description": "Swagger operationId/alias for the web service."
+                },
+                "inputParameterDefinitions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ParameterDefinition"
+                    },
+                    "description": "Input parameters definitions for the execution"
+                },
+                "outputParameterDefinitions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ParameterDefinition"
+                    },
+                    "description": "Output parameter definitions for the execution"
+                }
+            }
+        },
+        "ConsoleOutputResponse": {
+            "type": "object",
+            "properties": {
+                "consoleOutput": {
+                    "type": "string",
+                    "description": "Console output of the current or last execution"
+                }
+            }
+        },
+        "StatusResponse": {
+            "type": "object",
+            "properties": {
+                "statusCode": {
+                    "type": "string",
+                    "enum": [
+                        "fail",
+                        "pass",
+                        "warn"
+                    ],
+                    "description": "Health of the system."
+                },
+                "details": {
+                    "type": "object",
+                    "description": "Details about the health of the system other than the status of its components",
+                    "additionalProperties": {
+                        "type": "object"
+                    }
+                },
+                "components": {
+                    "type": "object",
+                    "description": "The status of the components that make up the system.",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/StatusResponse"
+                    }
+                }
+            }
+        },
+        "SwaggerJsonResponse": {
+            "type": "object",
+            "properties": {
+                "swaggerJson": {
+                    "type": "string",
+                    "description": "Swagger Json string."
+                }
+            }
+        }
+    }
+}
