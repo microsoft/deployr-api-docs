@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Core Operationalization APIs</title>
+    <title>Core APIs</title>
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -38,27 +38,27 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-                <li><a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Back to MSDN documentation</a>  </li>
-                <li><a href="./swagger/rserver-swagger-9.0.1.json" target="_blank">Download swagger file</a>  </li>
+                <li><a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Back to Product documentation</a>  </li>
+                <li><a href="./swagger/rserver-swagger-9.1.0.json" target="_blank">Download swagger file</a>  </li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
         <div class="content">
           <h1 id="overview">Overview</h1>
-<p><span style="font-size:20px;">Core Operationalization APIs</span></p>
-<p>Integration technology for deploying R analytics inside web, desktop, mobile, and dashboard applications as well as backend systems. Turn your R scripts into analytics web services, so R code can be easily executed by applications running on a secure server.</p>
-<p>The core R Server operationalization APIs can be grouped into several categories, including: <a href="#authentication-apis">Authentication</a>, <a href="#services-management-apis">Web Services</a>, <a href="#session-apis">Sessions</a>, <a href="#snapshot-apis">Snapshots</a>, and <a href="#status-apis">Status</a>.</p>
+<p><span style="font-size:20px;">Core APIs</span></p>
+<p>Integration technology for deploying R analytics inside web, desktop, mobile, and dashboard applications as well as backend systems. Turn your R scripts into analytics web services, so code can be easily executed by applications running on a secure server.</p>
+<p>The core APIs can be grouped into several categories, including: <a href="#authentication-apis">Authentication</a>, <a href="#services-management-apis">Web Services</a>, <a href="#session-apis">Sessions</a>, <a href="#snapshot-apis">Snapshots</a>, and <a href="#status-apis">Status</a>.</p>
 <blockquote>
 <h3 id="external-documentation">External Documentation</h3>
-<p><a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Back to MSDN documentation</a></p>
+<p><a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Back to Product documentation</a></p>
 <h3 id="version-information">Version information</h3>
-<p><em>Version</em> : 9.0.1</p>
+<p><em>Version</em> : 9.1.0</p>
 <h3 id="license-information">License information</h3>
 <p><em>License</em> : <a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Copyright (C) Microsoft Corporation. All rights reserved.</a></p>
 </blockquote>
 <h3 id="swagger">Swagger</h3>
-<p>Download the <a href="./swagger/rserver-swagger-9.0.1.json" target="_blank">swagger</a> spec file for these APIs</p>
+<p>Download the <a href="./swagger/rserver-swagger-9.1.0.json" target="_blank">swagger</a> spec file for these APIs</p>
 <h3 id="uri-scheme">URI scheme</h3>
 <p><em>Schemes</em>: http, https</p>
 <h3 id="consumes">Consumes</h3>
@@ -71,13 +71,13 @@
 </ul>
 <h1 id="authentication-apis">Authentication APIs</h1>
 <p>The &#x60;authentication&#x60; APIs provide authentication related operations and access workflow features.</p>
-<p>All operationalization API calls must be authenticated using the &#x60;POST /login&#x60; API or through Azure Active Directory.</p>
-<p>If you use the &#x60;POST /login&#x60; API, R Server will issue you a <a href="https://msdn.microsoft.com/en-us/microsoft-r/operationalize/security-access-tokens">bearer/access token</a>. This bearer token is a lightweight security token that grants the “bearer” access to a protected resource, in this case, R Server&#x27;s core operationalization APIs. Once a user has been authenticated, the application must validate the user’s bearer token to ensure that authentication was successful for the intended parties. If your organization uses Azure Active Directory, then AAD will issue the token.</p>
+<p>All API calls must be authenticated using the &#x60;POST /login&#x60; API or through Azure Active Directory.</p>
+<p>If you use the &#x60;POST /login&#x60; API, R Server will issue you a <a href="https://msdn.microsoft.com/en-us/microsoft-r/operationalize/security-access-tokens">bearer/access token</a>. This bearer token is a lightweight security token that grants the “bearer” access to a protected resource, in this case, the core APIs. Once a user has been authenticated, the application must validate the user’s bearer token to ensure that authentication was successful for the intended parties. If your organization uses Azure Active Directory, then AAD will issue the token.</p>
 <h2 id="login-user">Login User</h2>
 <h3 id="path">Path</h3>
 <p>POST  /login</p>
 <h3 id="description">Description</h3>
-<p>Logs the user in</p>
+<p>Logs the user in.</p>
 <blockquote>
 <p>Example Request </p>
 </blockquote>
@@ -113,7 +113,7 @@
 <tr>
 <td><strong>body</strong></td>
 <td><strong>loginRequest</strong> <br><span class="property-required">required</span></td>
-<td>Login properties for athentication</td>
+<td>Login properties for athentication.</td>
 <td><a href="#loginrequest">LoginRequest</a></td>
 </tr>
 </tbody>
@@ -178,7 +178,7 @@
 <tr>
 <td><strong>body</strong></td>
 <td><strong>renewTokenRequest</strong> <br><span class="property-required">required</span></td>
-<td>Renew access token properties for athentication</td>
+<td>Renew access token properties for athentication.</td>
 <td><a href="#renewtokenrequest">RenewTokenRequest</a></td>
 </tr>
 </tbody>
@@ -236,7 +236,7 @@
 <tr>
 <td><strong>query</strong></td>
 <td><strong>refreshToken</strong> <br><span class="property-required">required</span></td>
-<td>The refresh token to be revoked</td>
+<td>The refresh token to be revoked.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
@@ -272,13 +272,13 @@
 <li>Discover</li>
 </ul>
 <p><strong>Note:</strong> For service consumption, please see the &#x60;/api&#x60; APIs</p>
-<p>An R Server web service is a stateless execution in an R shell on the compute node. Each web service is uniquely defined by a &#x60;name&#x60; and &#x60;version&#x60; for easy service consumption and meaningful machine-readable discovery approaches.</p>
+<p>An R Server web service is a stateless execution on the compute node. Each web service is uniquely defined by a &#x60;name&#x60; and &#x60;version&#x60; for easy service consumption and meaningful machine-readable discovery approaches.</p>
 <p>These RESTful APIs for web services provide programmatic access to a service&#x27;s lifecycle. The APIs are straightforward, easy-to-use, and when composed together, can form the foundation for more expressive operations.</p>
 <p>Web services can be versioned to improve the release of services for service authors and make it easier for consumers to identify the services they are calling.  Service versioning is an important part of the publishing process and is designed to be flexible without naming restrictions. We highly recommend the adoption of meaningful and standard versioning conventions such as <a href="http://semver.org/">semantic versioning</a>.</p>
 <p>If a web service is published without a version &#x60;GET /services/{name}&#x60;, a Globally Unique Identifier (GUID) will be created as a unique reference number to represent a version. Since the GUID is not a meaningful version number, the intention is allow an author to treat the service as a <em>development</em> version (seen only by the author) until it is ready to be promoted and shared. From there, a more meaningful version number can be chosen during service publishing to represent a stable release.</p>
-<p>Whenever a web service is published &#x60;POST /services/{name}/{version}&#x60;, an endpoint is registered &#x60;/api/{name}/{version}&#x60;, which in turn triggers the generation of a custom <a href="http://swagger.io">Swagger</a>-based JSON file. <a href="https://msdn.microsoft.com/en-us/microsoft-r/operationalize/api-client-libraries">Learn more about consuming web services</a>.</p>
+<p>Whenever a web service is published &#x60;POST /services/{name}/{version}&#x60; or &#x60;POST /realtime-services/{name}/{version}&#x60;, an endpoint is registered &#x60;/api/{name}/{version}&#x60;, which in turn triggers the generation of a custom <a href="http://swagger.io">Swagger</a>-based JSON file. <a href="https://msdn.microsoft.com/en-us/microsoft-r/operationalize/api-client-libraries">Learn more about consuming web services</a>.</p>
 <p>If you use a snapshot when developing your web service, the session snapshot information will be baked into the service API when published and available to any authenticated user consuming that web service later.</p>
-<p>Please note that while only the web service author can update, publish, or delete a service, any authenticated user can retrieve a list of services or consume a service.</p>
+<p>Publish the web services for the logged in user with given name and a unique version. By default, all users have permission to publish a web service. However, if your administrator has <a href="https://msdn.microsoft.com/en-us/microsoft-r/operationalize/security-roles">defined authorization roles</a>, those roles determine which users can publish, update and delete web services.</p>
 <h2 id="get-services">Get Services</h2>
 <h3 id="path">Path</h3>
 <p>GET  /services</p>
@@ -291,8 +291,8 @@
     {
         "<span class="hljs-attribute">creationTime</span>": <span class="hljs-value"><span class="hljs-string">"2016-11-20T18:15:09.917656"</span></span>,
         "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"addition"</span></span>,
-        "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"v1.0.0"</span></span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Addition Service"</span></span>,
+        "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"1.0.0"</span></span>,
+        "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Addition Service."</span></span>,
         "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"result &lt;- x + y"</span></span>,
         "<span class="hljs-attribute">snapshotId</span>": <span class="hljs-value"><span class="hljs-string">"8fac71e8-92a9-4959-a679-4376e5aab20d"</span></span>,
         "<span class="hljs-attribute">owner</span>": <span class="hljs-value"><span class="hljs-string">"deployruser"</span></span>,
@@ -357,6 +357,11 @@
     ]</span>,
     "<span class="hljs-attribute">outputParameterDefinitions</span>": <span class="hljs-value">[
         <span class="hljs-string">"array"</span>
+    ]</span>,
+    "<span class="hljs-attribute">runtimeType</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+    "<span class="hljs-attribute">initCode</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+    "<span class="hljs-attribute">outputFileNames</span>": <span class="hljs-value">[
+        <span class="hljs-string">"array"</span>
     ]
 </span>}
 </code></pre>
@@ -399,7 +404,7 @@
 <tbody>
 <tr>
 <td><strong>201</strong></td>
-<td style="text-align:center">Created</td>
+<td style="text-align:center">Created.</td>
 <td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
@@ -421,13 +426,15 @@
 </blockquote>
 <pre><code class="highlight json">[
     {
-        "<span class="hljs-attribute">creationTime</span>": <span class="hljs-value"><span class="hljs-string">"2016-11-20T18:15:09.917656"</span></span>,
         "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"addition"</span></span>,
-        "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"v1.0.0"</span></span>,
-        "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Addition Service"</span></span>,
-        "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"result &lt;- x + y"</span></span>,
+        "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"1.0"</span></span>,
+        "<span class="hljs-attribute">versionPublishedBy</span>": <span class="hljs-value"><span class="hljs-string">"admin"</span></span>,
+        "<span class="hljs-attribute">creationTime</span>": <span class="hljs-value"><span class="hljs-string">"2016-11-20T18:15:09.917656"</span></span>,
         "<span class="hljs-attribute">snapshotId</span>": <span class="hljs-value"><span class="hljs-string">"8fac71e8-92a9-4959-a679-4376e5aab20d"</span></span>,
-        "<span class="hljs-attribute">owner</span>": <span class="hljs-value"><span class="hljs-string">"deployruser"</span></span>,
+        "<span class="hljs-attribute">runtimeType</span>": <span class="hljs-value"><span class="hljs-string">"R"</span></span>,
+        "<span class="hljs-attribute">initCode</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+        "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"result &lt;- x + y"</span></span>,
+        "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Addition Service."</span></span>,
         "<span class="hljs-attribute">operationId</span>": <span class="hljs-value"><span class="hljs-string">"add"</span></span>,
         "<span class="hljs-attribute">inputParameterDefinitions</span>": <span class="hljs-value">[
             {
@@ -444,7 +451,11 @@
                 "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"result"</span></span>,
                 "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"numeric"</span>
             </span>}
-        ]
+        ]</span>,
+        "<span class="hljs-attribute">outputFileNames</span>": <span class="hljs-value">[
+            <span class="hljs-string">"Histogram.png"</span>
+        ]</span>,
+        "<span class="hljs-attribute">myPermissionOnService</span>": <span class="hljs-value"><span class="hljs-string">"read only"</span>
     </span>}
 ]
 </code></pre>
@@ -490,6 +501,78 @@
 <ul>
 <li><code>401</code> - Unauthorized </li>
 </ul>
+<h2 id="create-realtime-web-service-by-name-">Create realtime web service by <code>name</code></h2>
+<h3 id="path">Path</h3>
+<p>POST  /realtime-services/{name}</p>
+<h3 id="description">Description</h3>
+<p>Publish the realtime web services for the logged in user with given name and a unique version.</p>
+<h3 id="method">Method</h3>
+<p>POST</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>path</strong></td>
+<td><strong>name</strong> <br><span class="property-required">required</span></td>
+<td>name of the realtime web service to be published.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>formData</strong></td>
+<td><strong>description</strong></td>
+<td>The description of the realtime web service to be published.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>formData</strong></td>
+<td><strong>operationId</strong></td>
+<td>Swagger operationId/alias for the realtime web service to be published.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>formData</strong></td>
+<td><strong>model</strong> <br><span class="property-required">required</span></td>
+<td>The binary serialized model to be used for realtime web service.</td>
+<td>file</td>
+</tr>
+</tbody>
+</table>
+<h3 id="responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>HTTP Codes</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:right">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>201</strong></td>
+<td style="text-align:center">Created.</td>
+<td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="errors">Errors</h3>
+<ul>
+<li><code>400</code> - Bad Request </li>
+<li><code>401</code> - Unauthorized</li>
+<li><code>403</code> - Forbidden (another user owns this service and you are not authorized to publish to it)</li>
+<li><code>409</code> - Conflict (another web service with same name and version exists. Use patch request if you want to update) </li>
+</ul>
+<h3 id="consumes">Consumes</h3>
+<ul>
+<li><code>multipart/form-data</code></li>
+</ul>
 <h2 id="create-service-by-name-and-version-">Create Service by <code>name</code> and <code>version</code></h2>
 <h3 id="path">Path</h3>
 <p>POST  /services/{name}/{version}</p>
@@ -507,6 +590,11 @@
         <span class="hljs-string">"array"</span>
     ]</span>,
     "<span class="hljs-attribute">outputParameterDefinitions</span>": <span class="hljs-value">[
+        <span class="hljs-string">"array"</span>
+    ]</span>,
+    "<span class="hljs-attribute">runtimeType</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+    "<span class="hljs-attribute">initCode</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+    "<span class="hljs-attribute">outputFileNames</span>": <span class="hljs-value">[
         <span class="hljs-string">"array"</span>
     ]
 </span>}
@@ -527,7 +615,7 @@
 <tr>
 <td><strong>path</strong></td>
 <td><strong>name</strong> <br><span class="property-required">required</span></td>
-<td>name of the published web service</td>
+<td>name of the published web service.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 <tr>
@@ -556,7 +644,7 @@
 <tbody>
 <tr>
 <td><strong>201</strong></td>
-<td style="text-align:center">Created</td>
+<td style="text-align:center">Created.</td>
 <td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
@@ -585,6 +673,11 @@
     ]</span>,
     "<span class="hljs-attribute">outputParameterDefinitions</span>": <span class="hljs-value">[
         <span class="hljs-string">"array"</span>
+    ]</span>,
+    "<span class="hljs-attribute">runtimeType</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+    "<span class="hljs-attribute">initCode</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+    "<span class="hljs-attribute">outputFileNames</span>": <span class="hljs-value">[
+        <span class="hljs-string">"array"</span>
     ]
 </span>}
 </code></pre>
@@ -604,13 +697,13 @@
 <tr>
 <td><strong>path</strong></td>
 <td><strong>name</strong> <br><span class="property-required">required</span></td>
-<td>name of the published web service</td>
+<td>The name of the published web service.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 <tr>
 <td><strong>path</strong></td>
 <td><strong>version</strong> <br><span class="property-required">required</span></td>
-<td>version of the published web service</td>
+<td>The version of the published web service.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 <tr>
@@ -654,13 +747,15 @@
 <p>Example Response &quot;<code>application/json</code>&quot;</p>
 </blockquote>
 <pre><code class="highlight json">{
-    "<span class="hljs-attribute">creationTime</span>": <span class="hljs-value"><span class="hljs-string">"2016-11-20T18:15:09.917656"</span></span>,
     "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"addition"</span></span>,
-    "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"v1.0.0"</span></span>,
-    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Addition Service"</span></span>,
-    "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"result &lt;- x + y"</span></span>,
+    "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"1.0"</span></span>,
+    "<span class="hljs-attribute">versionPublishedBy</span>": <span class="hljs-value"><span class="hljs-string">"admin"</span></span>,
+    "<span class="hljs-attribute">creationTime</span>": <span class="hljs-value"><span class="hljs-string">"2016-11-20T18:15:09.917656"</span></span>,
     "<span class="hljs-attribute">snapshotId</span>": <span class="hljs-value"><span class="hljs-string">"8fac71e8-92a9-4959-a679-4376e5aab20d"</span></span>,
-    "<span class="hljs-attribute">owner</span>": <span class="hljs-value"><span class="hljs-string">"deployruser"</span></span>,
+    "<span class="hljs-attribute">runtimeType</span>": <span class="hljs-value"><span class="hljs-string">"R"</span></span>,
+    "<span class="hljs-attribute">initCode</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+    "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"result &lt;- x + y"</span></span>,
+    "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"Addition Service."</span></span>,
     "<span class="hljs-attribute">operationId</span>": <span class="hljs-value"><span class="hljs-string">"add"</span></span>,
     "<span class="hljs-attribute">inputParameterDefinitions</span>": <span class="hljs-value">[
         {
@@ -677,7 +772,11 @@
             "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"result"</span></span>,
             "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"numeric"</span>
         </span>}
-    ]
+    ]</span>,
+    "<span class="hljs-attribute">outputFileNames</span>": <span class="hljs-value">[
+        <span class="hljs-string">"Histogram.png"</span>
+    ]</span>,
+    "<span class="hljs-attribute">myPermissionOnService</span>": <span class="hljs-value"><span class="hljs-string">"read only"</span>
 </span>}
 </code></pre>
 <h3 id="method">Method</h3>
@@ -696,13 +795,13 @@
 <tr>
 <td><strong>path</strong></td>
 <td><strong>name</strong> <br><span class="property-required">required</span></td>
-<td>name of the published web service</td>
+<td>The name of the published web service.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 <tr>
 <td><strong>path</strong></td>
 <td><strong>version</strong> <br><span class="property-required">required</span></td>
-<td>version of the published web service</td>
+<td>The version of the published web service.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
@@ -750,13 +849,13 @@
 <tr>
 <td><strong>path</strong></td>
 <td><strong>name</strong> <br><span class="property-required">required</span></td>
-<td>name of the published web service</td>
+<td>The name of the published web service.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 <tr>
 <td><strong>path</strong></td>
 <td><strong>version</strong> <br><span class="property-required">required</span></td>
-<td>version of the published web service</td>
+<td>The version of the published web service.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
@@ -784,6 +883,162 @@
 <li><code>403</code> - Forbidden (service with that name and version is owned by a different user, only the owner can delete it guid) </li>
 <li><code>404</code> - Not Found (service not found) </li>
 </ul>
+<h2 id="create-realtime-web-service-by-name-and-version-">Create realtime web service by <code>name</code> and <code>version</code>.</h2>
+<h3 id="path">Path</h3>
+<p>POST  /realtime-services/{name}/{version}</p>
+<h3 id="description">Description</h3>
+<p>Publish the realtime web services for the logged in user with given name and given version.</p>
+<h3 id="method">Method</h3>
+<p>POST</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>path</strong></td>
+<td><strong>name</strong> <br><span class="property-required">required</span></td>
+<td>The name of the realtime web service to be published.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>path</strong></td>
+<td><strong>version</strong> <br><span class="property-required">required</span></td>
+<td>The version of the realtime web service to be published.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>formData</strong></td>
+<td><strong>description</strong></td>
+<td>The description of the realtime web service to be published.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>formData</strong></td>
+<td><strong>operationId</strong></td>
+<td>Swagger operationId/alias for the realtime web service to be published.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>formData</strong></td>
+<td><strong>model</strong> <br><span class="property-required">required</span></td>
+<td>The binary serialized model to be used for realtime web service.</td>
+<td>file</td>
+</tr>
+</tbody>
+</table>
+<h3 id="responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>HTTP Codes</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:right">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>201</strong></td>
+<td style="text-align:center">Created.</td>
+<td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="errors">Errors</h3>
+<ul>
+<li><code>400</code> - Bad Request </li>
+<li><code>401</code> - Unauthorized</li>
+<li><code>403</code> - Forbidden (another user owns this service and you are not authorized to publish to it)</li>
+<li><code>409</code> - Conflict (another web service with same name and version exists. Use patch request if you want to update) </li>
+</ul>
+<h3 id="consumes">Consumes</h3>
+<ul>
+<li><code>multipart/form-data</code></li>
+</ul>
+<h2 id="patch-realtime-web-service">Patch realtime web service</h2>
+<h3 id="path">Path</h3>
+<p>PATCH  /realtime-services/{name}/{version}</p>
+<h3 id="description">Description</h3>
+<p>Updates the published realtime web service.</p>
+<h3 id="method">Method</h3>
+<p>PATCH</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>path</strong></td>
+<td><strong>name</strong> <br><span class="property-required">required</span></td>
+<td>Name of the published realtime web service</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>path</strong></td>
+<td><strong>version</strong> <br><span class="property-required">required</span></td>
+<td>Version of the published realtime web service</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>formData</strong></td>
+<td><strong>description</strong></td>
+<td>The description of the realtime web service to be published.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>formData</strong></td>
+<td><strong>operationId</strong></td>
+<td>Swagger operationId/alias for the realtime web service to be published.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>formData</strong></td>
+<td><strong>model</strong></td>
+<td>The binary serialized model to be used for realtime web service.</td>
+<td>file</td>
+</tr>
+</tbody>
+</table>
+<h3 id="responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>HTTP Codes</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:right">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td style="text-align:center">OK</td>
+<td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="errors">Errors</h3>
+<ul>
+<li><code>400</code> - Bad Request</li>
+<li><code>401</code> - Unauthorized</li>
+<li><code>403</code> - Forbidden (service with that name and version is owned by a different user, only the owner can update it)</li>
+<li><code>404</code> - Not Found (web service not found) </li>
+</ul>
+<h3 id="consumes">Consumes</h3>
+<ul>
+<li><code>multipart/form-data</code></li>
+</ul>
 <h1 id="service-consumption-apis">Service Consumption APIs</h1>
 <p>The &#x60;service api&#x60; APIs provide operations for obtaining the &#x60;swagger&#x60; service holding and capabilities for a specific published web service. From this, analytic web service consumption can take place.</p>
 <h2 id="get-api-swagger">Get API Swagger</h2>
@@ -792,11 +1047,9 @@
 <h3 id="description">Description</h3>
 <p>Returns a <em>Swagger</em> <code>swagger.json</code> describing a published web service&#39;s API capabilities.</p>
 <blockquote>
-<p>Example Response &quot;<code>application/json</code>&quot;</p>
+<p>Example Response &quot;<code>text/plain</code>&quot;</p>
 </blockquote>
-<pre><code class="highlight json">{
-    "<span class="hljs-attribute">swagger</span>": <span class="hljs-value"><span class="hljs-string">"2.0"</span>
-</span>}
+<pre><code class="highlight json"><span class="hljs-string">"The service's `swagger.json` document."</span>
 </code></pre>
 <h3 id="method">Method</h3>
 <p>GET</p>
@@ -814,13 +1067,13 @@
 <tr>
 <td><strong>path</strong></td>
 <td><strong>name</strong> <br><span class="property-required">required</span></td>
-<td>name of the published web service.</td>
+<td>The name of the published web service.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 <tr>
 <td><strong>path</strong></td>
 <td><strong>version</strong> <br><span class="property-required">required</span></td>
-<td>version of the published web service.</td>
+<td>The version of the published web service.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
@@ -849,14 +1102,14 @@
 <li><code>404</code> - Not Found (Web service not found)  </li>
 </ul>
 <h1 id="session-apis">Session APIs</h1>
-<p>The &#x60;sessions&#x60; APIs provide functionality for R session management, which can be divided into the following groups:</p>
+<p>The &#x60;sessions&#x60; APIs provide functionality for session management, which can be divided into the following groups:</p>
 <ul>
-<li>&#x60;Session lifecycle APIs&#x60; help manage the R session lifecycle.</li>
+<li>&#x60;Session lifecycle APIs&#x60; help manage the session lifecycle.</li>
 <li>&#x60;Session workspace APIs&#x60; help manage the objects in your workspace.</li>
 <li>&#x60;Session working directory APIs&#x60; help manage the files in your workspace.</li>
 <li>&#x60;Session snapshot APIs&#x60; help create and manage session snapshots. More snapshot APIs are covered in the next section.</li>
 </ul>
-<p>A session is an interactive stateful R session that is run in an R shell on the compute node. A session is managed by R Server on behalf of the application.</p>
+<p>A session is an interactive stateful session that is run in an R shell on the compute node. A session is managed by R Server on behalf of the application.</p>
 <h2 id="create-session">Create Session</h2>
 <h3 id="path">Path</h3>
 <p>POST  /sessions</p>
@@ -867,7 +1120,8 @@
 </blockquote>
 <pre><code class="highlight json">{
     "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-    "<span class="hljs-attribute">snapshotId</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
+    "<span class="hljs-attribute">snapshotId</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+    "<span class="hljs-attribute">runtimeType</span>": <span class="hljs-value"><span class="hljs-string">"string"</span>
 </span>}
 </code></pre>
 <blockquote>
@@ -910,7 +1164,7 @@
 <tbody>
 <tr>
 <td><strong>201</strong></td>
-<td style="text-align:center">Normal case returns the id of the newly created session</td>
+<td style="text-align:center">Created. Returns the id of the newly created session.</td>
 <td style="text-align:right"><a href="#createsessionresponse">CreateSessionResponse</a></td>
 </tr>
 </tbody>
@@ -964,6 +1218,84 @@
 <ul>
 <li><code>401</code> - Unauthorized </li>
 </ul>
+<h2 id="execute-code">Execute Code</h2>
+<h3 id="path">Path</h3>
+<p>POST  /sessions/{id}/execute</p>
+<h3 id="description">Description</h3>
+<p>Executes code in the context of a specific session.</p>
+<blockquote>
+<p>Example Request </p>
+</blockquote>
+<pre><code class="highlight json">{
+    "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
+    "<span class="hljs-attribute">inputParameters</span>": <span class="hljs-value">[
+        <span class="hljs-string">"array"</span>
+    ]</span>,
+    "<span class="hljs-attribute">outputParameters</span>": <span class="hljs-value">[
+        <span class="hljs-string">"array"</span>
+    ]
+</span>}
+</code></pre>
+<blockquote>
+<p>Example Response &quot;<code>application/json</code>&quot;</p>
+</blockquote>
+<pre><code class="highlight json">{
+    "<span class="hljs-attribute">success</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
+    "<span class="hljs-attribute">errorMessage</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
+    "<span class="hljs-attribute">outputParameters</span>": <span class="hljs-value">[]</span>,
+    "<span class="hljs-attribute">consoleOutput</span>": <span class="hljs-value"><span class="hljs-string">"[1] 5\r\n"</span></span>,
+    "<span class="hljs-attribute">changedFiles</span>": <span class="hljs-value">[]
+</span>}
+</code></pre>
+<h3 id="method">Method</h3>
+<p>POST</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>path</strong></td>
+<td><strong>id</strong> <br><span class="property-required">required</span></td>
+<td>Id of the session.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+<tr>
+<td><strong>body</strong></td>
+<td><strong>executeRequest</strong> <br><span class="property-required">required</span></td>
+<td>code that needs to be executed</td>
+<td><a href="#executerequest">ExecuteRequest</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>HTTP Codes</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:right">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td style="text-align:center">OK</td>
+<td style="text-align:right"><a href="#executeresponse">ExecuteResponse</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="errors">Errors</h3>
+<ul>
+<li><code>401</code> - Unauthorized</li>
+<li><code>404</code> - Not Found (session not found) </li>
+</ul>
 <h2 id="delete-session">Delete Session</h2>
 <h3 id="path">Path</h3>
 <p>DELETE  /sessions/{id}</p>
@@ -985,7 +1317,7 @@
 <tr>
 <td><strong>path</strong></td>
 <td><strong>id</strong> <br><span class="property-required">required</span></td>
-<td>Id of the session to close.</td>
+<td>Id of the session to delete.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
@@ -1016,7 +1348,7 @@
 <h3 id="path">Path</h3>
 <p>DELETE  /sessions/{id}/force</p>
 <h3 id="description">Description</h3>
-<p>Aattempt to <em>forcefully</em> close a session and releases all it&#39;s associated resources</p>
+<p>Attempt to <em>kill</em> a session and releases all it&#39;s associated resources.</p>
 <h3 id="method">Method</h3>
 <p>DELETE</p>
 <h3 id="parameters">Parameters</h3>
@@ -1033,7 +1365,7 @@
 <tr>
 <td><strong>path</strong></td>
 <td><strong>id</strong> <br><span class="property-required">required</span></td>
-<td>Id of the session to close.</td>
+<td>Id of the session to delete.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
@@ -1064,7 +1396,7 @@
 <h3 id="path">Path</h3>
 <p>GET  /sessions/{id}/console-output</p>
 <h3 id="description">Description</h3>
-<p>Returns the console output for the current or last execution</p>
+<p>Returns the console output for the current or last execution.</p>
 <blockquote>
 <p>Example Response &quot;<code>application/json</code>&quot;</p>
 </blockquote>
@@ -1119,7 +1451,7 @@
 <h3 id="path">Path</h3>
 <p>GET  /sessions/{id}/history</p>
 <h3 id="description">Description</h3>
-<p>Lists all history for a specific session</p>
+<p>Lists all history for a specific session.</p>
 <blockquote>
 <p>Example Response &quot;<code>application/json</code>&quot;</p>
 </blockquote>
@@ -1176,7 +1508,7 @@
 <h3 id="path">Path</h3>
 <p>POST  /sessions/{id}/files</p>
 <h3 id="description">Description</h3>
-<p>Loads a file into the R session working directory. The uploaded file name is extracted from the file and if another file with the same name already exists in the working directory, the file will be overwritten.</p>
+<p>Loads a file into the session working directory. The uploaded file name is extracted from the file and if another file with the same name already exists in the working directory, the file will be overwritten.</p>
 <h3 id="method">Method</h3>
 <p>POST</p>
 <h3 id="parameters">Parameters</h3>
@@ -1238,7 +1570,7 @@
 <h3 id="path">Path</h3>
 <p>GET  /sessions/{id}/files</p>
 <h3 id="description">Description</h3>
-<p>Lists all files of a specific session</p>
+<p>Lists all files of a specific session.</p>
 <blockquote>
 <p>Example Response &quot;<code>application/json</code>&quot;</p>
 </blockquote>
@@ -1295,7 +1627,7 @@
 <h3 id="path">Path</h3>
 <p>GET  /sessions/{id}/files/{fileName}</p>
 <h3 id="description">Description</h3>
-<p>Downloads a file from a session as stream.</p>
+<p>Downloads a file from a session as a stream.</p>
 <h3 id="method">Method</h3>
 <p>GET</p>
 <h3 id="parameters">Parameters</h3>
@@ -1403,7 +1735,7 @@
 <h3 id="path">Path</h3>
 <p>GET  /sessions/{id}/workspace</p>
 <h3 id="description">Description</h3>
-<p>Lists all object names of a specific session</p>
+<p>Lists all object names of a specific session.</p>
 <blockquote>
 <p>Example Response &quot;<code>application/json</code>&quot;</p>
 </blockquote>
@@ -1462,7 +1794,7 @@
 <h3 id="path">Path</h3>
 <p>POST  /sessions/{id}/workspace/{objectName}</p>
 <h3 id="description">Description</h3>
-<p>Upload a serialized R object into R session, The object has to be serialized using the &#39;serialize&#39; R function. If an object  with the same name already exists in the workspace, the object  value will be overwritten. Simple R code to serialize an object:<br><code>R objectInR &lt;- 10 serializedObjectInR &lt;- serialize(objectInR, NULL) connection &lt;- file(&#39;binaryFile&#39;,&#39;wb&#39;) POST(&#39;http://deployR.example/sessions/sessionId/workspace/objectName&#39;, body = connection)</code></p>
+<p>Upload a serialized object into the session.</p>
 <blockquote>
 <p>Example Request </p>
 </blockquote>
@@ -1490,13 +1822,13 @@
 <tr>
 <td><strong>path</strong></td>
 <td><strong>objectName</strong> <br><span class="property-required">required</span></td>
-<td>Name of the R object.</td>
+<td>Name of the object.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 <tr>
 <td><strong>body</strong></td>
 <td><strong>serializedObject</strong> <br><span class="property-required">required</span></td>
-<td>The binary file that contains serialized R object to be uploaded, the binary file Content-Type should be &#x27;application/octet-stream&#x27;</td>
+<td>The binary file that contains a serialized object to be uploaded. The binary file &#x60;Content-Type&#x60; should be &#x60;application/octet-stream&#x60;.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
@@ -1531,7 +1863,8 @@
 <h3 id="path">Path</h3>
 <p>GET  /sessions/{id}/workspace/{objectName}</p>
 <h3 id="description">Description</h3>
-<p>Returns an R object from a session as a <code>.RData</code> file stream</p>
+<p>Returns an object from a session. For the <code>R</code> runtime, the object is serialized as a <code>.RData</code> file stream. For the <code>Python</code> runtime, the object is serialized as a <code>.dill</code> file stream.</p>
+<p><strong>Important</strong> Python objects are not guaranteed to be compatible with versions other than Python <code>3.5</code>.</p>
 <blockquote>
 <p>Example Response &quot;<code>application/octet-stream</code>&quot;</p>
 </blockquote>
@@ -1640,89 +1973,15 @@
 <li><code>401</code> - Unauthorized</li>
 <li><code>404</code> - Not Found (session or object not found) </li>
 </ul>
-<h2 id="execute-code">Execute Code</h2>
-<h3 id="path">Path</h3>
-<p>POST  /sessions/{id}/execute</p>
-<h3 id="description">Description</h3>
-<p>Executes R code in the context of a specific session.</p>
-<blockquote>
-<p>Example Request </p>
-</blockquote>
-<pre><code class="highlight json">{
-    "<span class="hljs-attribute">code</span>": <span class="hljs-value"><span class="hljs-string">"string"</span></span>,
-    "<span class="hljs-attribute">inputParameters</span>": <span class="hljs-value">[
-        <span class="hljs-string">"array"</span>
-    ]</span>,
-    "<span class="hljs-attribute">outputParameters</span>": <span class="hljs-value">[
-        <span class="hljs-string">"array"</span>
-    ]
-</span>}
-</code></pre>
-<blockquote>
-<p>Example Response &quot;<code>application/json</code>&quot;</p>
-</blockquote>
-<pre><code class="highlight json">{
-    "<span class="hljs-attribute">success</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
-    "<span class="hljs-attribute">errorMessage</span>": <span class="hljs-value"><span class="hljs-string">""</span></span>,
-    "<span class="hljs-attribute">outputParameters</span>": <span class="hljs-value">[]</span>,
-    "<span class="hljs-attribute">consoleOutput</span>": <span class="hljs-value"><span class="hljs-string">"[1] 5\r\n"</span></span>,
-    "<span class="hljs-attribute">changedFiles</span>": <span class="hljs-value">[]
-</span>}
-</code></pre>
-<h3 id="method">Method</h3>
-<p>POST</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>path</strong></td>
-<td><strong>id</strong> <br><span class="property-required">required</span></td>
-<td>Id of the session.</td>
-<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-<tr>
-<td><strong>body</strong></td>
-<td><strong>executeRequest</strong> <br><span class="property-required">required</span></td>
-<td>R code that needs to be executed</td>
-<td><a href="#executerequest">ExecuteRequest</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="responses">Responses</h3>
-<table>
-<thead>
-<tr>
-<th>HTTP Codes</th>
-<th style="text-align:center">Description</th>
-<th style="text-align:right">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>200</strong></td>
-<td style="text-align:center">OK</td>
-<td style="text-align:right"><a href="#executeresponse">ExecuteResponse</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="errors">Errors</h3>
-<ul>
-<li><code>401</code> - Unauthorized</li>
-<li><code>404</code> - Not Found (session not found) </li>
-</ul>
+<h1 id="snapshot-apis">Snapshot APIs</h1>
+<p>These APIs provide different operations to access and manage workspace snapshots. A snapshot is a prepared environment image of an R or Python session saved to Microsoft R Server. A snapshot also includes the session&#x27;s packages, objects and data files.</p>
+<p>For optimal performance, consider the size of the snapshot carefully especially when publishing a service. Before creating a snapshot, ensure that you keep only those workspace objects you need and purge the rest. And, in the event that you only need a single object, consider passing that object alone itself instead of using a snapshot. </p>
+<p>A snapshot can be loaded into any subsequent remote session for the user who created it.  For example, suppose you want to execute a script that needs three R packages, a reference data file, and a model object.   Instead of loading these items each time you want to execute the script, create a snapshot of an session containing them. Then, you can save time later by loading this snapshot using its ID to get the session contents exactly as they were at the time the snapshot was created.</p>
 <h2 id="create-snapshot">Create Snapshot</h2>
 <h3 id="path">Path</h3>
 <p>POST  /sessions/{id}/snapshot</p>
 <h3 id="description">Description</h3>
-<p>Create a snapshot from R session by saving the workspace and all files in the working directory into zip file, the return value will be the created snapshot Id.</p>
+<p>Create a snapshot from session by saving the workspace and all files in the working directory into zip file, the return value will be the created snapshot Id.</p>
 <blockquote>
 <p>Example Request </p>
 </blockquote>
@@ -1790,7 +2049,8 @@
 <h3 id="path">Path</h3>
 <p>POST  /sessions/{id}/loadsnapshot/{snapshotId}</p>
 <h3 id="description">Description</h3>
-<p>Loads a snapshot into R session by merging the workspace of the saved snapshot and target session. It will override the files in the working directory as well.</p>
+<p>Loads a snapshot into session by merging the workspace of the saved snapshot and target session. It will override the files in the working directory as well. </p>
+<p><strong>Note - </strong> You can only load R snapshots to R session and Python snapshots to a Python session.</p>
 <h3 id="method">Method</h3>
 <p>POST</p>
 <h3 id="parameters">Parameters</h3>
@@ -1840,6 +2100,15 @@
 <li><code>401</code> - Unauthorized</li>
 <li><code>404</code> - Not Found (session or snapshot not found) </li>
 </ul>
+<h1 id="session-apis">Session APIs</h1>
+<p>The &#x60;sessions&#x60; APIs provide functionality for session management, which can be divided into the following groups:</p>
+<ul>
+<li>&#x60;Session lifecycle APIs&#x60; help manage the session lifecycle.</li>
+<li>&#x60;Session workspace APIs&#x60; help manage the objects in your workspace.</li>
+<li>&#x60;Session working directory APIs&#x60; help manage the files in your workspace.</li>
+<li>&#x60;Session snapshot APIs&#x60; help create and manage session snapshots. More snapshot APIs are covered in the next section.</li>
+</ul>
+<p>A session is an interactive stateful session that is run in an R shell on the compute node. A session is managed by R Server on behalf of the application.</p>
 <h2 id="cancel-session">Cancel Session</h2>
 <h3 id="path">Path</h3>
 <p>POST  /sessions/{id}/cancel</p>
@@ -1889,9 +2158,9 @@
 <li><code>404</code> - Not Found (session not found) </li>
 </ul>
 <h1 id="snapshot-apis">Snapshot APIs</h1>
-<p>These APIs provide different operations to access and manage workspace snapshots. A snapshot is a prepared environment image of a R session saved to Microsoft R Server, which includes the session&#x27;s R packages, R objects and data files. </p>
-<p>For optimal performance, consider the size of the snapshot carefully especially when publishing a service. Before creating a snapshot, ensure that you keep only those workspace objects you need and purge the rest.  And, in the event that you only need a single object, consider passing that object alone itself instead of using a snapshot. </p>
-<p>A snapshot can be loaded into any subsequent remote R session for the user who created it.  For example, suppose you want to execute a script that needs three R packages, a reference data file, and a model object.   Instead of loading these items each time you want to execute the script, create a snapshot of an R session containing them. Then, you can save time later by loading this snapshot using its ID to get the session contents exactly as they were at the time the snapshot was created.</p>
+<p>These APIs provide different operations to access and manage workspace snapshots. A snapshot is a prepared environment image of an R or Python session saved to Microsoft R Server. A snapshot also includes the session&#x27;s packages, objects and data files.</p>
+<p>For optimal performance, consider the size of the snapshot carefully especially when publishing a service. Before creating a snapshot, ensure that you keep only those workspace objects you need and purge the rest. And, in the event that you only need a single object, consider passing that object alone itself instead of using a snapshot. </p>
+<p>A snapshot can be loaded into any subsequent remote session for the user who created it.  For example, suppose you want to execute a script that needs three R packages, a reference data file, and a model object.   Instead of loading these items each time you want to execute the script, create a snapshot of an session containing them. Then, you can save time later by loading this snapshot using its ID to get the session contents exactly as they were at the time the snapshot was created.</p>
 <h2 id="get-snapshots">Get Snapshots</h2>
 <h3 id="path">Path</h3>
 <p>GET  /snapshots</p>
@@ -2027,46 +2296,57 @@
 <p>Example Response &quot;<code>application/json</code>&quot;</p>
 </blockquote>
 <pre><code class="highlight json">{
-    "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"green"</span></span>,
+    "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"pass"</span></span>,
     "<span class="hljs-attribute">components</span>": <span class="hljs-value">{
         "<span class="hljs-attribute">backends</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"green"</span></span>,
+            "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"pass"</span></span>,
             "<span class="hljs-attribute">components</span>": <span class="hljs-value">{
                 "<span class="hljs-attribute">http://localhost:12805/</span>": <span class="hljs-value">{
-                    "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"green"</span></span>,
+                    "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"pass"</span></span>,
                     "<span class="hljs-attribute">components</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
                     "<span class="hljs-attribute">details</span>": <span class="hljs-value">{
-                        "<span class="hljs-attribute">can Open Shell</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
-                        "<span class="hljs-attribute">can Write</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
-                        "<span class="hljs-attribute">can Read</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
-                        "<span class="hljs-attribute">can Zip</span>": <span class="hljs-value"><span class="hljs-literal">true</span></span>,
-                        "<span class="hljs-attribute">max Pool Size</span>": <span class="hljs-value"><span class="hljs-number">80</span></span>,
-                        "<span class="hljs-attribute">active Shell Count</span>": <span class="hljs-value"><span class="hljs-number">1</span></span>,
-                        "<span class="hljs-attribute">current Pool Size</span>": <span class="hljs-value"><span class="hljs-number">11</span>
+                        "<span class="hljs-attribute">rMaxPoolSize</span>": <span class="hljs-value"><span class="hljs-number">80</span></span>,
+                        "<span class="hljs-attribute">rActiveShellCount</span>": <span class="hljs-value"><span class="hljs-number">2</span></span>,
+                        "<span class="hljs-attribute">rCurrentPoolSize</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+                        "<span class="hljs-attribute">rCanOpenShell</span>": <span class="hljs-value"><span class="hljs-string">"True"</span></span>,
+                        "<span class="hljs-attribute">pythonMaxPoolSize</span>": <span class="hljs-value"><span class="hljs-number">80</span></span>,
+                        "<span class="hljs-attribute">pythonActiveShellCount</span>": <span class="hljs-value"><span class="hljs-number">0</span></span>,
+                        "<span class="hljs-attribute">pythonCurrentPoolSize</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
+                        "<span class="hljs-attribute">pythonCanOpenShell</span>": <span class="hljs-value"><span class="hljs-string">"True"</span></span>,
+                        "<span class="hljs-attribute">apiVersion</span>": <span class="hljs-value"><span class="hljs-string">"1.0"</span></span>,
+                        "<span class="hljs-attribute">logPath</span>": <span class="hljs-value"><span class="hljs-string">"C:\\Program Files\\Microsoft\\R Server\\R_SERVER\\o16n\\Microsoft.RServer.ComputeNode\\logs"</span>
+                    </span>}
+                </span>}
+            </span>}</span>,
+            "<span class="hljs-attribute">details</span>": <span class="hljs-value">{}
+        </span>}</span>,
+        "<span class="hljs-attribute">authentication</span>": <span class="hljs-value">{
+            "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"pass"</span></span>,
+            "<span class="hljs-attribute">components</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">azureActiveDirectory</span>": <span class="hljs-value">{
+                    "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"pass"</span></span>,
+                    "<span class="hljs-attribute">components</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
+                    "<span class="hljs-attribute">details</span>": <span class="hljs-value">{
+                        "<span class="hljs-attribute">authority</span>": <span class="hljs-value"><span class="hljs-string">"https://login.windows.net/microsoft.com"</span></span>,
+                        "<span class="hljs-attribute">audience</span>": <span class="hljs-value"><span class="hljs-string">"xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"</span>
                     </span>}
                 </span>}
             </span>}</span>,
             "<span class="hljs-attribute">details</span>": <span class="hljs-value">{}
         </span>}</span>,
         "<span class="hljs-attribute">database</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"green"</span></span>,
+            "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"pass"</span></span>,
             "<span class="hljs-attribute">components</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
             "<span class="hljs-attribute">details</span>": <span class="hljs-value">{
+                "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"sqlite"</span></span>,
                 "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"main"</span></span>,
                 "<span class="hljs-attribute">state</span>": <span class="hljs-value"><span class="hljs-string">"Open"</span>
             </span>}
-        </span>}</span>,
-        "<span class="hljs-attribute">ldap</span>": <span class="hljs-value">{
-            "<span class="hljs-attribute">statusCode</span>": <span class="hljs-value"><span class="hljs-string">"green"</span></span>,
-            "<span class="hljs-attribute">components</span>": <span class="hljs-value"><span class="hljs-literal">null</span></span>,
-            "<span class="hljs-attribute">details</span>": <span class="hljs-value">{
-                "<span class="hljs-attribute">host</span>": <span class="hljs-value"><span class="hljs-string">"40.118.170.246"</span></span>,
-                "<span class="hljs-attribute">port</span>": <span class="hljs-value"><span class="hljs-number">636</span></span>,
-                "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-number">3</span>
-            </span>}
         </span>}
     </span>}</span>,
-    "<span class="hljs-attribute">details</span>": <span class="hljs-value">{}
+    "<span class="hljs-attribute">details</span>": <span class="hljs-value">{
+        "<span class="hljs-attribute">logPath</span>": <span class="hljs-value"><span class="hljs-string">"C:\\Program Files\\Microsoft\\R Server\\R_SERVER\\o16n\\Microsoft.RServer.WebNode\\logs"</span>
+    </span>}
 </span>}
 </code></pre>
 <h3 id="method">Method</h3>
@@ -2097,67 +2377,69 @@
 <h2 id="session">Session</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>id</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>owner</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>id</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Unique identifier representing the session.</p>
+<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Name of the session.</p>
+<p><strong>owner</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Owner of the session.</p>
+<p><strong>runtimeType</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [R, Python]</span><br>Type of the runtime.</p>
 <h2 id="createsessionrequest">CreateSessionRequest</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>snapshotId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Name of the session. <strong>Optional</strong></p>
+<p><strong>snapshotId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Id of the snapshot to be loaded into the new created session. <strong>Optional</strong></p>
+<p><strong>runtimeType</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [R, Python]</span><br>Type of the runtime. <strong>Optional [Default R]</strong></p>
 <h2 id="createsessionresponse">CreateSessionResponse</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>sessionId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>sessionId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Id of the newly created session.</p>
 <h2 id="snapshot">Snapshot</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>id</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>owner</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>creationTime</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>contentSize</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">integer</a></p>
+<p><strong>id</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Unique identifier representing the snapshot.</p>
+<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Name of the snapshot.</p>
+<p><strong>owner</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Owner of the snapshot.</p>
+<p><strong>creationTime</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Creation time of the snapshot.</p>
+<p><strong>contentSize</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">integer</a><br>Size of the zip file of the snapshot.</p>
 <h2 id="createsnapshotrequest">CreateSnapshotRequest</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Name of the snapshot. <strong>Optional</strong></p>
 <h2 id="createsnapshotresponse">CreateSnapshotResponse</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>snapshotId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>snapshotId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Id of the created snapshot.</p>
 <h2 id="executerequest">ExecuteRequest</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>code</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>inputParameters</strong>: <a href="#workspaceobject">WorkspaceObject</a></p>
-<p><strong>outputParameters</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>code</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>code to execute. <strong><font color = 'red'>Required</font></strong></p>
+<p><strong>inputParameters</strong>: <a href="#workspaceobject">WorkspaceObject</a><br>Input parameters for the execution. <strong>Optional</strong></p>
+<p><strong>outputParameters</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Output parameters for the execution. <strong>Optional</strong></p>
 <h2 id="executeresponse">ExecuteResponse</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>success</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></p>
-<p><strong>errorMessage</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>outputParameters</strong>: <a href="#workspaceobject">WorkspaceObject</a></p>
-<p><strong>consoleOutput</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>changedFiles</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>success</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a><br>The operation was successful.</p>
+<p><strong>errorMessage</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Errors returned by the execution.</p>
+<p><strong>outputParameters</strong>: <a href="#workspaceobject">WorkspaceObject</a><br>Output parameters for the execution.</p>
+<p><strong>consoleOutput</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>The console output of the execution.</p>
+<p><strong>changedFiles</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>The filenames of the files modified during execution.</p>
 <h2 id="workspaceobject">WorkspaceObject</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>value</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></p>
+<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>The name of the workspace object.</p>
+<p><strong>value</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a><br>Value of the object as JSON.</p>
 <h2 id="parameterdefinition">ParameterDefinition</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>type</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>The name of the parameter object.</p>
+<p><strong>type</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [logical, numeric, integer, character, vector, matrix, data.frame]</span><br>The type of the parameter object.</p>
 <h2 id="loginrequest">LoginRequest</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>username</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>password</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>username</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>The name of the user. <strong><font color = 'red'>Required</font></strong></p>
+<p><strong>password</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>The password of the user. <strong><font color = 'red'>Required</font></strong></p>
 <h2 id="renewtokenrequest">RenewTokenRequest</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>refreshToken</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>refreshToken</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>A currently valid refresh token. <strong><font color='red'>Required</font></strong></p>
 <h2 id="accesstokenresponse">AccessTokenResponse</h2>
 <p class="schema-properties">PROPERTIES</p>
 
@@ -2170,41 +2452,48 @@
 
 <p><strong>message</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
 <p><strong>link</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>exceptionType</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
 <h2 id="publishwebservicerequest">PublishWebServiceRequest</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>snapshotId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>code</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>description</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>operationId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>inputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a></p>
-<p><strong>outputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a></p>
+<p><strong>snapshotId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>ID of the snapshot to be used for service. <strong>Optional</strong></p>
+<p><strong>code</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Code to execute. Specific to the runtime type. <strong><font color = 'red'>Required</font></strong></p>
+<p><strong>description</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Description for the web service. <strong>Optional</strong></p>
+<p><strong>operationId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Swagger operationId/alias for web service. <strong>Optional</strong></p>
+<p><strong>inputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a><br>Input parameters definitions for the execution. <strong>Optional</strong></p>
+<p><strong>outputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a><br>Output parameter definitions for the execution. <strong>Optional</strong></p>
+<p><strong>runtimeType</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [R, Python]</span><br>Type of the runtime. <strong>Optional [Default R]</strong></p>
+<p><strong>initCode</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Code that runs before each request. Specific to the runtime type. <strong>Optional</strong></p>
+<p><strong>outputFileNames</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Files that are returned by the response. <strong>Optional</strong></p>
 <h2 id="webservice">WebService</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>version</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>creationTime</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>snapshotId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>code</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>description</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>operationId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>inputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a></p>
-<p><strong>outputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a></p>
+<p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Name of the published service.</p>
+<p><strong>version</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Version of the Published Service.</p>
+<p><strong>versionPublishedBy</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Username of the user who published this version of the published web-service.</p>
+<p><strong>creationTime</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Creation time for the service.</p>
+<p><strong>snapshotId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>ID of the snapshot to be used for service.</p>
+<p><strong>runtimeType</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [R, Python, Realtime]</span><br>Type of the runtime.</p>
+<p><strong>initCode</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Code to execute before the request. Specific to the runtime type.</p>
+<p><strong>code</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Code to execute. Specific to the runtime type.</p>
+<p><strong>description</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Description of the web service.</p>
+<p><strong>operationId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Swagger operationId/alias for the web service.</p>
+<p><strong>inputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a><br>Input parameters definitions for the execution</p>
+<p><strong>outputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a><br>Output parameter definitions for the execution</p>
+<p><strong>outputFileNames</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Files that are returned by the request</p>
+<p><strong>myPermissionOnService</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>User&#39;s permission for this service, it is either &#39;read/write&#39; or &#39;read only&#39;.&#39;read/write&#39; means that the user can update/delete this service and &#39;read only&#39; means that the user can consume it only.</p>
 <h2 id="consoleoutputresponse">ConsoleOutputResponse</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>consoleOutput</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>consoleOutput</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Console output of the current or last execution</p>
 <h2 id="statusresponse">StatusResponse</h2>
 <p class="schema-properties">PROPERTIES</p>
 
-<p><strong>statusCode</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<p><strong>details</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></p>
-<p><strong>components</strong>: <a href="#statusresponse">StatusResponse</a></p>
+<p><strong>statusCode</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [fail, pass, warn]</span><br>Health of the system.</p>
+<p><strong>details</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a><br>Details about the health of the system other than the status of its components.</p>
+<p><strong>components</strong>: <a href="#statusresponse">StatusResponse</a><br>The status of the components that make up the system.</p>
 <h2 id="swaggerjsonresponse">SwaggerJsonResponse</h2>
-<p class="schema-properties">PROPERTIES</p>
-
-<p><strong>swaggerJson</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p>The <strong>Swagger</strong> document defining a published web service. The structure is represented as a valid <em>swagger 2.0</em> <code>string</code> of <code>json</code>.</p>
 <h1 id="error-codes">Error Codes</h1>
 <aside class="notice">
 HTTP Error status code summary
