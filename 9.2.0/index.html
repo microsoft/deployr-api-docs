@@ -39,7 +39,7 @@
       </div>
         <ul class="toc-footer">
                 <li><a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Back to Product documentation</a>  </li>
-                <li><a href="./swagger/mlserver-swagger-9.2.1.json" target="_blank">Download swagger file</a>  </li>
+                <li><a href="./swagger/rserver-swagger-9.2.0.json" target="_blank">Download swagger file</a>  </li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -47,18 +47,18 @@
         <div class="content">
           <h1 id="overview">Overview</h1>
 <p><span style="font-size:20px;">Core APIs</span></p>
-<p>Integration technology for deploying R and Python analytics inside web, desktop, mobile, and dashboard applications as well as backend systems. Turn your R or Python scripts into analytics web services, so code can be easily executed by applications running on a secure server.</p>
-<p>The core APIs can be grouped into several categories, including: <a href="#authentication-apis">Authentication</a>, <a href="#services-management-apis">Web Services</a>, <a href="#session-apis">Sessions</a>, <a href="#snapshot-apis">Snapshots</a>, <a href="#status-apis">Status</a>, and <a href="#centralized-configuration-apis">Centralized Configuration</a>.</p>
+<p>Integration technology for deploying R analytics inside web, desktop, mobile, and dashboard applications as well as backend systems. Turn your R scripts into analytics web services, so code can be easily executed by applications running on a secure server.</p>
+<p>The core APIs can be grouped into several categories, including: <a href="#authentication-apis">Authentication</a>, <a href="#services-management-apis">Web Services</a>, <a href="#session-apis">Sessions</a>, <a href="#snapshot-apis">Snapshots</a>, and <a href="#status-apis">Status</a>.</p>
 <blockquote>
 <h3 id="external-documentation">External Documentation</h3>
 <p><a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Back to Product documentation</a></p>
 <h3 id="version-information">Version information</h3>
-<p><em>Version</em> : 9.2.1</p>
+<p><em>Version</em> : 9.2.0</p>
 <h3 id="license-information">License information</h3>
 <p><em>License</em> : <a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Copyright (C) Microsoft Corporation. All rights reserved.</a></p>
 </blockquote>
 <h3 id="swagger">Swagger</h3>
-<p>Download the <a href="./swagger/mlserver-swagger-9.2.1.json" target="_blank">swagger</a> spec file for these APIs</p>
+<p>Download the <a href="./swagger/rserver-swagger-9.2.0.json" target="_blank">swagger</a> spec file for these APIs</p>
 <h3 id="uri-scheme">URI scheme</h3>
 <p><em>Schemes</em>: http, https</p>
 <h3 id="consumes">Consumes</h3>
@@ -72,7 +72,7 @@
 <h1 id="authentication-apis">Authentication APIs</h1>
 <p>The &#x60;authentication&#x60; APIs provide authentication related operations and access workflow features.</p>
 <p>All API calls must be authenticated using the &#x60;POST /login&#x60; API or through Azure Active Directory.</p>
-<p>If you use the &#x60;POST /login&#x60; API, ML Server will issue you a <a href="https://msdn.microsoft.com/en-us/microsoft-r/operationalize/security-access-tokens">bearer/access token</a>. This bearer token is a lightweight security token that grants the “bearer” access to a protected resource, in this case, the core APIs. Once a user has been authenticated, the application must validate the user’s bearer token to ensure that authentication was successful for the intended parties. If your organization uses Azure Active Directory, then AAD will issue the token.</p>
+<p>If you use the &#x60;POST /login&#x60; API, R Server will issue you a <a href="https://msdn.microsoft.com/en-us/microsoft-r/operationalize/security-access-tokens">bearer/access token</a>. This bearer token is a lightweight security token that grants the “bearer” access to a protected resource, in this case, the core APIs. Once a user has been authenticated, the application must validate the user’s bearer token to ensure that authentication was successful for the intended parties. If your organization uses Azure Active Directory, then AAD will issue the token.</p>
 <h2 id="login-user">Login User</h2>
 <h3 id="path">Path</h3>
 <p>POST  /login</p>
@@ -272,7 +272,7 @@
 <li>Discover</li>
 </ul>
 <p><strong>Note:</strong> For service consumption, please see the &#x60;/api&#x60; APIs</p>
-<p>An ML Server web service is a stateless execution on the compute node. Each web service is uniquely defined by a &#x60;name&#x60; and &#x60;version&#x60; for easy service consumption and meaningful machine-readable discovery approaches.</p>
+<p>An R Server web service is a stateless execution on the compute node. Each web service is uniquely defined by a &#x60;name&#x60; and &#x60;version&#x60; for easy service consumption and meaningful machine-readable discovery approaches.</p>
 <p>These RESTful APIs for web services provide programmatic access to a service&#x27;s lifecycle. The APIs are straightforward, easy-to-use, and when composed together, can form the foundation for more expressive operations.</p>
 <p>Web services can be versioned to improve the release of services for service authors and make it easier for consumers to identify the services they are calling.  Service versioning is an important part of the publishing process and is designed to be flexible without naming restrictions. We highly recommend the adoption of meaningful and standard versioning conventions such as <a href="http://semver.org/">semantic versioning</a>.</p>
 <p>If a web service is published without a version &#x60;GET /services/{name}&#x60;, a Globally Unique Identifier (GUID) will be created as a unique reference number to represent a version. Since the GUID is not a meaningful version number, the intention is allow an author to treat the service as a <em>development</em> version (seen only by the author) until it is ready to be promoted and shared. From there, a more meaningful version number can be chosen during service publishing to represent a stable release.</p>
@@ -1109,7 +1109,7 @@
 <li>&#x60;Session working directory APIs&#x60; help manage the files in your workspace.</li>
 <li>&#x60;Session snapshot APIs&#x60; help create and manage session snapshots. More snapshot APIs are covered in the next section.</li>
 </ul>
-<p>A session is an interactive stateful session that is run in an R or Python shell on the compute node. A session is managed by ML Server on behalf of the application.</p>
+<p>A session is an interactive stateful session that is run in an R shell on the compute node. A session is managed by R Server on behalf of the application.</p>
 <h2 id="create-session">Create Session</h2>
 <h3 id="path">Path</h3>
 <p>POST  /sessions</p>
@@ -1288,54 +1288,6 @@
 <td><strong>200</strong></td>
 <td style="text-align:center">OK</td>
 <td style="text-align:right"><a href="#executeresponse">ExecuteResponse</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="errors">Errors</h3>
-<ul>
-<li><code>401</code> - Unauthorized</li>
-<li><code>404</code> - Not Found (session not found) </li>
-</ul>
-<h2 id="cancel-session">Cancel Session</h2>
-<h3 id="path">Path</h3>
-<p>POST  /sessions/{id}/cancel</p>
-<h3 id="description">Description</h3>
-<p>Cancel a session by aborting the current execution operation, afterwards the session will be alive and ready to accept any calls. Cancel session is <strong>not</strong> guaranteed to interrupt the execution</p>
-<h3 id="method">Method</h3>
-<p>POST</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>path</strong></td>
-<td><strong>id</strong> <br><span class="property-required">required</span></td>
-<td>Id of the session to cancel.</td>
-<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="responses">Responses</h3>
-<table>
-<thead>
-<tr>
-<th>HTTP Codes</th>
-<th style="text-align:center">Description</th>
-<th style="text-align:right">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>200</strong></td>
-<td style="text-align:center">OK</td>
-<td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
 </table>
@@ -1940,7 +1892,7 @@
 <tr>
 <td><strong>path</strong></td>
 <td><strong>objectName</strong> <br><span class="property-required">required</span></td>
-<td>Name of the R or Python object.</td>
+<td>Name of the R object.</td>
 <td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
@@ -2022,7 +1974,7 @@
 <li><code>404</code> - Not Found (session or object not found) </li>
 </ul>
 <h1 id="snapshot-apis">Snapshot APIs</h1>
-<p>These APIs provide different operations to access and manage workspace snapshots. A snapshot is a prepared environment image of an R or Python session saved to Microsoft ML Server. A snapshot also includes the session&#x27;s packages, objects and data files.</p>
+<p>These APIs provide different operations to access and manage workspace snapshots. A snapshot is a prepared environment image of an R or Python session saved to Microsoft R Server. A snapshot also includes the session&#x27;s packages, objects and data files.</p>
 <p>For optimal performance, consider the size of the snapshot carefully especially when publishing a service. Before creating a snapshot, ensure that you keep only those workspace objects you need and purge the rest. And, in the event that you only need a single object, consider passing that object alone itself instead of using a snapshot. </p>
 <p>A snapshot can be loaded into any subsequent remote session for the user who created it.  For example, suppose you want to execute a script that needs three R packages, a reference data file, and a model object.   Instead of loading these items each time you want to execute the script, create a snapshot of an session containing them. Then, you can save time later by loading this snapshot using its ID to get the session contents exactly as they were at the time the snapshot was created.</p>
 <h2 id="create-snapshot">Create Snapshot</h2>
@@ -2148,6 +2100,67 @@
 <li><code>401</code> - Unauthorized</li>
 <li><code>404</code> - Not Found (session or snapshot not found) </li>
 </ul>
+<h1 id="session-apis">Session APIs</h1>
+<p>The &#x60;sessions&#x60; APIs provide functionality for session management, which can be divided into the following groups:</p>
+<ul>
+<li>&#x60;Session lifecycle APIs&#x60; help manage the session lifecycle.</li>
+<li>&#x60;Session workspace APIs&#x60; help manage the objects in your workspace.</li>
+<li>&#x60;Session working directory APIs&#x60; help manage the files in your workspace.</li>
+<li>&#x60;Session snapshot APIs&#x60; help create and manage session snapshots. More snapshot APIs are covered in the next section.</li>
+</ul>
+<p>A session is an interactive stateful session that is run in an R shell on the compute node. A session is managed by R Server on behalf of the application.</p>
+<h2 id="cancel-session">Cancel Session</h2>
+<h3 id="path">Path</h3>
+<p>POST  /sessions/{id}/cancel</p>
+<h3 id="description">Description</h3>
+<p>Cancel a session by aborting the current execution operation, afterwards the session will be alive and ready to accept any calls. Cancel session is <strong>not</strong> guaranteed to interrupt the execution</p>
+<h3 id="method">Method</h3>
+<p>POST</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>path</strong></td>
+<td><strong>id</strong> <br><span class="property-required">required</span></td>
+<td>Id of the session to cancel.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>HTTP Codes</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:right">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td style="text-align:center">OK</td>
+<td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="errors">Errors</h3>
+<ul>
+<li><code>401</code> - Unauthorized</li>
+<li><code>404</code> - Not Found (session not found) </li>
+</ul>
+<h1 id="snapshot-apis">Snapshot APIs</h1>
+<p>These APIs provide different operations to access and manage workspace snapshots. A snapshot is a prepared environment image of an R or Python session saved to Microsoft R Server. A snapshot also includes the session&#x27;s packages, objects and data files.</p>
+<p>For optimal performance, consider the size of the snapshot carefully especially when publishing a service. Before creating a snapshot, ensure that you keep only those workspace objects you need and purge the rest. And, in the event that you only need a single object, consider passing that object alone itself instead of using a snapshot. </p>
+<p>A snapshot can be loaded into any subsequent remote session for the user who created it.  For example, suppose you want to execute a script that needs three R packages, a reference data file, and a model object.   Instead of loading these items each time you want to execute the script, create a snapshot of an session containing them. Then, you can save time later by loading this snapshot using its ID to get the session contents exactly as they were at the time the snapshot was created.</p>
 <h2 id="get-snapshots">Get Snapshots</h2>
 <h3 id="path">Path</h3>
 <p>GET  /snapshots</p>
@@ -2301,7 +2314,7 @@
                         "<span class="hljs-attribute">pythonCurrentPoolSize</span>": <span class="hljs-value"><span class="hljs-number">5</span></span>,
                         "<span class="hljs-attribute">pythonCanOpenShell</span>": <span class="hljs-value"><span class="hljs-string">"True"</span></span>,
                         "<span class="hljs-attribute">apiVersion</span>": <span class="hljs-value"><span class="hljs-string">"1.0"</span></span>,
-                        "<span class="hljs-attribute">logPath</span>": <span class="hljs-value"><span class="hljs-string">"C:\\Program Files\\Microsoft\\ML Server\\R_SERVER\\o16n\\Microsoft.RServer.ComputeNode\\logs"</span>
+                        "<span class="hljs-attribute">logPath</span>": <span class="hljs-value"><span class="hljs-string">"C:\\Program Files\\Microsoft\\R Server\\R_SERVER\\o16n\\Microsoft.RServer.ComputeNode\\logs"</span>
                     </span>}
                 </span>}
             </span>}</span>,
@@ -2332,7 +2345,7 @@
         </span>}
     </span>}</span>,
     "<span class="hljs-attribute">details</span>": <span class="hljs-value">{
-        "<span class="hljs-attribute">logPath</span>": <span class="hljs-value"><span class="hljs-string">"C:\\Program Files\\Microsoft\\ML Server\\R_SERVER\\o16n\\Microsoft.RServer.WebNode\\logs"</span>
+        "<span class="hljs-attribute">logPath</span>": <span class="hljs-value"><span class="hljs-string">"C:\\Program Files\\Microsoft\\R Server\\R_SERVER\\o16n\\Microsoft.RServer.WebNode\\logs"</span>
     </span>}
 </span>}
 </code></pre>
@@ -2360,210 +2373,6 @@
 <li><code>401</code> - Unauthorized</li>
 <li><code>500</code> - Internal Server Error (server cannot report its own status) </li>
 </ul>
-<h1 id="centralized-configuration-apis">Centralized Configuration APIs</h1>
-<p>These APIs manage the configuration shared between all the web nodes. Changes to web node configuration made via the APIs are reflected across all web nodes.<br>Currently, the APIs allow for the compute node URIs to be viewed or changed view the GetComputeNodes, SetComputeNodes, AddComputeNode, and RemoveComputeNode APIs.</p>
-<h2 id="get-compute-nodes">Get Compute Nodes</h2>
-<h3 id="path">Path</h3>
-<p>GET  /computenodes</p>
-<h3 id="description">Description</h3>
-<p>Lists all existing compute node uris.</p>
-<h3 id="method">Method</h3>
-<p>GET</p>
-<h3 id="responses">Responses</h3>
-<table>
-<thead>
-<tr>
-<th>HTTP Codes</th>
-<th style="text-align:center">Description</th>
-<th style="text-align:right">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>200</strong></td>
-<td style="text-align:center">OK</td>
-<td style="text-align:right"><a href="#getcomputenodesresponse">GetComputeNodesResponse</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="errors">Errors</h3>
-<ul>
-<li><code>401</code> - Unauthorized </li>
-</ul>
-<h2 id="set-compute-nodes">Set Compute Nodes</h2>
-<h3 id="path">Path</h3>
-<p>POST  /computenodes</p>
-<h3 id="description">Description</h3>
-<p>Sets entire list of compute node uris, overriding previous entries.</p>
-<blockquote>
-<p>Example Request </p>
-</blockquote>
-<pre><code class="highlight json">{
-    "<span class="hljs-attribute">entries</span>": <span class="hljs-value">[
-        <span class="hljs-string">"array"</span>
-    ]
-</span>}
-</code></pre>
-<h3 id="method">Method</h3>
-<p>POST</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>body</strong></td>
-<td><strong>entries</strong> <br><span class="property-required">required</span></td>
-<td>List of URIs or Ranges to set. Will override previous entries.</td>
-<td><a href="#updatecomputenodesrequest">UpdateComputeNodesRequest</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="responses">Responses</h3>
-<table>
-<thead>
-<tr>
-<th>HTTP Codes</th>
-<th style="text-align:center">Description</th>
-<th style="text-align:right">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>200</strong></td>
-<td style="text-align:center">OK</td>
-<td style="text-align:right">N/A</td>
-</tr>
-</tbody>
-</table>
-<h3 id="errors">Errors</h3>
-<ul>
-<li><code>400</code> - Bad Request </li>
-<li><code>401</code> - Unauthorized</li>
-<li><code>403</code> - Forbidden (user does not have admin role) </li>
-</ul>
-<h2 id="add-compute-node">Add Compute Node</h2>
-<h3 id="path">Path</h3>
-<p>PUT  /computenodes</p>
-<h3 id="description">Description</h3>
-<p>Add Compute Node URIs or Ranges to list.</p>
-<blockquote>
-<p>Example Request </p>
-</blockquote>
-<pre><code class="highlight json">{
-    "<span class="hljs-attribute">entries</span>": <span class="hljs-value">[
-        <span class="hljs-string">"array"</span>
-    ]
-</span>}
-</code></pre>
-<h3 id="method">Method</h3>
-<p>PUT</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>body</strong></td>
-<td><strong>entries</strong> <br><span class="property-required">required</span></td>
-<td>List of URIs or Ranges to be added.</td>
-<td><a href="#updatecomputenodesrequest">UpdateComputeNodesRequest</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="responses">Responses</h3>
-<table>
-<thead>
-<tr>
-<th>HTTP Codes</th>
-<th style="text-align:center">Description</th>
-<th style="text-align:right">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>200</strong></td>
-<td style="text-align:center">OK</td>
-<td style="text-align:right">N/A</td>
-</tr>
-</tbody>
-</table>
-<h3 id="errors">Errors</h3>
-<ul>
-<li><code>400</code> - Bad Request </li>
-<li><code>401</code> - Unauthorized</li>
-<li><code>403</code> - Forbidden (user does not have admin role) </li>
-</ul>
-<h2 id="remove-compute-node">Remove Compute Node</h2>
-<h3 id="path">Path</h3>
-<p>DELETE  /computenodes</p>
-<h3 id="description">Description</h3>
-<p>Remove Compute Node URIs or Ranges from list.</p>
-<blockquote>
-<p>Example Request </p>
-</blockquote>
-<pre><code class="highlight json">{
-    "<span class="hljs-attribute">entries</span>": <span class="hljs-value">[
-        <span class="hljs-string">"array"</span>
-    ]
-</span>}
-</code></pre>
-<h3 id="method">Method</h3>
-<p>DELETE</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>body</strong></td>
-<td><strong>entries</strong> <br><span class="property-required">required</span></td>
-<td>List of URIs or Ranges to be removed.</td>
-<td><a href="#updatecomputenodesrequest">UpdateComputeNodesRequest</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="responses">Responses</h3>
-<table>
-<thead>
-<tr>
-<th>HTTP Codes</th>
-<th style="text-align:center">Description</th>
-<th style="text-align:right">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>200</strong></td>
-<td style="text-align:center">OK</td>
-<td style="text-align:right">N/A</td>
-</tr>
-</tbody>
-</table>
-<h3 id="errors">Errors</h3>
-<ul>
-<li><code>400</code> - Bad Request </li>
-<li><code>401</code> - Unauthorized</li>
-<li><code>403</code> - Forbidden (user does not have admin role) </li>
-</ul>
 <h1 id="schema-definitions">Schema Definitions</h1>
 <h2 id="session">Session</h2>
 <p class="schema-properties">PROPERTIES</p>
@@ -2572,14 +2381,6 @@
 <p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Name of the session.</p>
 <p><strong>owner</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Owner of the session.</p>
 <p><strong>runtimeType</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [R, Python]</span><br>Type of the runtime.</p>
-<h2 id="updatecomputenodesrequest">UpdateComputeNodesRequest</h2>
-<p class="schema-properties">PROPERTIES</p>
-
-<p><strong>entries</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<h2 id="getcomputenodesresponse">GetComputeNodesResponse</h2>
-<p class="schema-properties">PROPERTIES</p>
-
-<p><strong>computeNodes</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
 <h2 id="createsessionrequest">CreateSessionRequest</h2>
 <p class="schema-properties">PROPERTIES</p>
 
@@ -2610,21 +2411,21 @@
 <p class="schema-properties">PROPERTIES</p>
 
 <p><strong>code</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>code to execute. <strong><font color = 'red'>Required</font></strong></p>
-<p><strong>inputParameters</strong>: <a href="#workspaceobject">WorkspaceObject</a></p>
-<p><strong>outputParameters</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>inputParameters</strong>: <a href="#workspaceobject">WorkspaceObject</a><br>Input parameters for the execution. <strong>Optional</strong></p>
+<p><strong>outputParameters</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Output parameters for the execution. <strong>Optional</strong></p>
 <h2 id="executeresponse">ExecuteResponse</h2>
 <p class="schema-properties">PROPERTIES</p>
 
 <p><strong>success</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a><br>The operation was successful.</p>
 <p><strong>errorMessage</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Errors returned by the execution.</p>
-<p><strong>outputParameters</strong>: <a href="#workspaceobject">WorkspaceObject</a></p>
+<p><strong>outputParameters</strong>: <a href="#workspaceobject">WorkspaceObject</a><br>Output parameters for the execution.</p>
 <p><strong>consoleOutput</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>The console output of the execution.</p>
-<p><strong>changedFiles</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>changedFiles</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>The filenames of the files modified during execution.</p>
 <h2 id="workspaceobject">WorkspaceObject</h2>
 <p class="schema-properties">PROPERTIES</p>
 
 <p><strong>name</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>The name of the workspace object.</p>
-<p><strong>value</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></p>
+<p><strong>value</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a><br>Value of the object as JSON.</p>
 <h2 id="parameterdefinition">ParameterDefinition</h2>
 <p class="schema-properties">PROPERTIES</p>
 
@@ -2659,11 +2460,11 @@
 <p><strong>code</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Code to execute. Specific to the runtime type. <strong><font color = 'red'>Required</font></strong></p>
 <p><strong>description</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Description for the web service. <strong>Optional</strong></p>
 <p><strong>operationId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Swagger operationId/alias for web service. <strong>Optional</strong></p>
-<p><strong>inputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a></p>
-<p><strong>outputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a></p>
+<p><strong>inputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a><br>Input parameters definitions for the execution. <strong>Optional</strong></p>
+<p><strong>outputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a><br>Output parameter definitions for the execution. <strong>Optional</strong></p>
 <p><strong>runtimeType</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [R, Python]</span><br>Type of the runtime. <strong>Optional [Default R]</strong></p>
 <p><strong>initCode</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Code that runs before each request. Specific to the runtime type. <strong>Optional</strong></p>
-<p><strong>outputFileNames</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>outputFileNames</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Files that are returned by the response. <strong>Optional</strong></p>
 <h2 id="webservice">WebService</h2>
 <p class="schema-properties">PROPERTIES</p>
 
@@ -2677,9 +2478,9 @@
 <p><strong>code</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Code to execute. Specific to the runtime type.</p>
 <p><strong>description</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Description of the web service.</p>
 <p><strong>operationId</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Swagger operationId/alias for the web service.</p>
-<p><strong>inputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a></p>
-<p><strong>outputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a></p>
-<p><strong>outputFileNames</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
+<p><strong>inputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a><br>Input parameters definitions for the execution</p>
+<p><strong>outputParameterDefinitions</strong>: <a href="#parameterdefinition">ParameterDefinition</a><br>Output parameter definitions for the execution</p>
+<p><strong>outputFileNames</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Files that are returned by the request</p>
 <p><strong>myPermissionOnService</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>User&#39;s permission for this service, it is either &#39;read/write&#39; or &#39;read only&#39;.&#39;read/write&#39; means that the user can update/delete this service and &#39;read only&#39; means that the user can consume it only.</p>
 <h2 id="consoleoutputresponse">ConsoleOutputResponse</h2>
 <p class="schema-properties">PROPERTIES</p>
@@ -2689,13 +2490,10 @@
 <p class="schema-properties">PROPERTIES</p>
 
 <p><strong>statusCode</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [fail, pass, warn]</span><br>Health of the system.</p>
-<p><strong>details</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></p>
-<p><strong>components</strong>: <a href="#statusresponse">StatusResponse</a></p>
+<p><strong>details</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a><br>Details about the health of the system other than the status of its components.</p>
+<p><strong>components</strong>: <a href="#statusresponse">StatusResponse</a><br>The status of the components that make up the system.</p>
 <h2 id="swaggerjsonresponse">SwaggerJsonResponse</h2>
-<p class="schema-properties">PROPERTIES</p>
-
-
-
+<p>The <strong>Swagger</strong> document defining a published web service. The structure is represented as a valid <em>swagger 2.0</em> <code>string</code> of <code>json</code>.</p>
 <h1 id="error-codes">Error Codes</h1>
 <aside class="notice">
 HTTP Error status code summary
