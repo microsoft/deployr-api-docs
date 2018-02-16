@@ -1,9 +1,9 @@
 {
    "swagger": "2.0",
    "info": {
-      "title": "MLServer",
+      "title": "MRSServer",
       "description": "Integration technology for deploying R and Python analytics inside web, desktop, mobile, and dashboard applications as well as backend systems. Turn your R or Python scripts into analytics web services, so code can be easily executed by applications running on a secure server.\n\nThe core APIs can be grouped into several categories, including: [Authentication](#authentication-apis), [Web Services](#services-management-apis), [Sessions](#session-apis), [Snapshots](#snapshot-apis), [Status](#status-apis), and [Centralized Configuration](#centralized-configuration-apis).\n",
-      "version": "9.2.1",
+      "version": "9.3.0",
       "termsOfService": "https://go.microsoft.com/fwlink/?linkid=836356",
       "license": {
          "name": "Copyright (C) Microsoft Corporation. All rights reserved.",
@@ -741,6 +741,142 @@
             }
          }
       },
+      "/services/{name}/{version}/pool": {
+         "post": {
+            "summary": "Create or update dedicated pool for web service",
+            "description": "Create or update a dedicated pool for service on all compute nodes.",
+            "operationId": "createOrUpdateServicePool",
+            "tags": [
+               "Services Management APIs"
+            ],
+            "parameters": [
+               {
+                  "name": "name",
+                  "in": "path",
+                  "description": "name of the web service.",
+                  "required": true,
+                  "type": "string"
+               },
+               {
+                  "name": "version",
+                  "in": "path",
+                  "description": "version of the web service.",
+                  "required": true,
+                  "type": "string"
+               },
+               {
+                  "name": "createOrUpdateServicePoolRequest",
+                  "in": "body",
+                  "required": true,
+                  "description": "Create or update Service pool request details.",
+                  "schema": {
+                     "$ref": "#/definitions/CreateOrUpdateServicePoolRequest"
+                  }
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Created.",
+                  "schema": {
+                     "type": "string"
+                  }
+               },
+               "default": {
+                  "description": "* `400` - Bad Request \n* `401` - Unauthorized\n* `403` - Forbidden (you are not authorized to create or update service pools))",
+                  "schema": {
+                     "$ref": "#/definitions/Error"
+                  }
+               }
+            }
+         },
+         "delete": {
+            "summary": "Delete dedicated pool for Service",
+            "description": "Delete a dedicated pool for service on all compute nodes.",
+            "operationId": "deleteServicePool",
+            "tags": [
+               "Services Management APIs"
+            ],
+            "parameters": [
+               {
+                  "name": "name",
+                  "in": "path",
+                  "description": "name of the web service.",
+                  "required": true,
+                  "type": "string"
+               },
+               {
+                  "name": "version",
+                  "in": "path",
+                  "description": "version of the web service.",
+                  "required": true,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "Deleted.",
+                  "schema": {
+                     "type": "string"
+                  }
+               },
+               "default": {
+                  "description": "* `400` - Bad Request \n* `401` - Unauthorized\n* `403` - Forbidden (you are not authorized to create or update service pools))",
+                  "schema": {
+                     "$ref": "#/definitions/Error"
+                  }
+               }
+            }
+         },
+         "get": {
+            "summary": "Get status of the dedicated pool for service.",
+            "description": "List status of the dedicated pools for the published web service on all ComputeNodes.",
+            "operationId": "getServicePoolStatus",
+            "tags": [
+               "Services Management APIs"
+            ],
+            "parameters": [
+               {
+                  "name": "name",
+                  "in": "path",
+                  "description": "name of the web service.",
+                  "required": true,
+                  "type": "string"
+               },
+               {
+                  "name": "version",
+                  "in": "path",
+                  "description": "version of the web service.",
+                  "required": true,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "OK",
+                  "schema": {
+                     "type": "array",
+                     "items": {
+                        "$ref": "#/definitions/ServicePoolStatusResponse"
+                     }
+                  },
+                  "examples": {
+                     "application/json": [
+                        {
+                           "ComputeNodeEndpoint": "http://localhost:12800",
+                           "Status": "Success"
+                        }
+                     ]
+                  }
+               },
+               "default": {
+                  "description": "* `401` - Unauthorized",
+                  "schema": {
+                     "$ref": "#/definitions/Error"
+                  }
+               }
+            }
+         }
+      },
       "/api/{name}/{version}/swagger.json": {
          "get": {
             "summary": "Get API Swagger",
@@ -903,39 +1039,6 @@
                         "consoleOutput": "[1] 5\r\n",
                         "changedFiles": []
                      }
-                  }
-               },
-               "default": {
-                  "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
-                  "schema": {
-                     "$ref": "#/definitions/Error"
-                  }
-               }
-            }
-         }
-      },
-      "/sessions/{id}/cancel": {
-         "post": {
-            "summary": "Cancel Session",
-            "description": "Cancel a session by aborting the current execution operation, afterwards the session will be alive and ready to accept any calls. Cancel session is **not** guaranteed to interrupt the execution",
-            "operationId": "cancelSession",
-            "tags": [
-               "Session APIs"
-            ],
-            "parameters": [
-               {
-                  "name": "id",
-                  "in": "path",
-                  "description": "Id of the session to cancel.",
-                  "required": true,
-                  "type": "string"
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "OK",
-                  "schema": {
-                     "type": "string"
                   }
                },
                "default": {
@@ -1501,6 +1604,39 @@
                },
                "default": {
                   "description": "* `401` - Unauthorized\n* `404` - Not Found (session or snapshot not found)",
+                  "schema": {
+                     "$ref": "#/definitions/Error"
+                  }
+               }
+            }
+         }
+      },
+      "/sessions/{id}/cancel": {
+         "post": {
+            "summary": "Cancel Session",
+            "description": "Cancel a session by aborting the current execution operation, afterwards the session will be alive and ready to accept any calls. Cancel session is **not** guaranteed to interrupt the execution",
+            "operationId": "cancelSession",
+            "tags": [
+               "Session APIs"
+            ],
+            "parameters": [
+               {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Id of the session to cancel.",
+                  "required": true,
+                  "type": "string"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "OK",
+                  "schema": {
+                     "type": "string"
+                  }
+               },
+               "default": {
+                  "description": "* `401` - Unauthorized\n* `404` - Not Found (session not found)",
                   "schema": {
                      "$ref": "#/definitions/Error"
                   }
@@ -2139,6 +2275,19 @@
             }
          }
       },
+      "CreateOrUpdateServicePoolRequest": {
+         "type": "object",
+         "properties": {
+            "InitialPoolSize": {
+               "type": "integer",
+               "description": "Initial size of the dedicated pool. Must be equal to or greater than 0. Also must be equal to or smaller than MaxPoolSize.**Optional**"
+            },
+            "MaxPoolSize": {
+               "type": "integer",
+               "description": "Maximum size of the dedicated pool. Must be equal to or greter than 0. Also must be equal to or greater than InitialPoolSize.**Optional**"
+            }
+         }
+      },
       "WebService": {
          "type": "object",
          "required": [
@@ -2264,6 +2413,24 @@
          "additionalProperties": {
             "type": "object",
             "description": "The **Swagger** document defining a published web service. The structure is represented as a valid _swagger 2.0_ `string` of `json`."
+         }
+      },
+      "ServicePoolStatusResponse": {
+         "type": "object",
+         "properties": {
+            "ComputeNodeEndpoint": {
+               "type": "string",
+               "description": "The Uri address of the Computenode."
+            },
+            "Status": {
+               "type": "string",
+               "enum": [
+                  "Success",
+                  "Pending",
+                  "NotFound"
+               ],
+               "description": "The status of the dedicate pool on the ComputeNode."
+            }
          }
       }
    }
