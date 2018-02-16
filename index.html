@@ -39,7 +39,7 @@
       </div>
         <ul class="toc-footer">
                 <li><a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Back to Product documentation</a>  </li>
-                <li><a href="./swagger/mlserver-swagger-9.3.0.json" target="_blank">Download swagger file</a>  </li>
+                <li><a href="./swagger/mlserver-swagger-9.2.1.json" target="_blank">Download swagger file</a>  </li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -53,12 +53,12 @@
 <h3 id="external-documentation">External Documentation</h3>
 <p><a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Back to Product documentation</a></p>
 <h3 id="version-information">Version information</h3>
-<p><em>Version</em> : 9.3.0</p>
+<p><em>Version</em> : 9.2.1</p>
 <h3 id="license-information">License information</h3>
 <p><em>License</em> : <a href="https://go.microsoft.com/fwlink/?linkid&#x3D;836356">Copyright (C) Microsoft Corporation. All rights reserved.</a></p>
 </blockquote>
 <h3 id="swagger">Swagger</h3>
-<p>Download the <a href="./swagger/mlserver-swagger-9.3.0.json" target="_blank">swagger</a> spec file for these APIs</p>
+<p>Download the <a href="./swagger/mlserver-swagger-9.2.1.json" target="_blank">swagger</a> spec file for these APIs</p>
 <h3 id="uri-scheme">URI scheme</h3>
 <p><em>Schemes</em>: http, https</p>
 <h3 id="consumes">Consumes</h3>
@@ -1039,193 +1039,6 @@
 <ul>
 <li><code>multipart/form-data</code></li>
 </ul>
-<h2 id="create-or-update-dedicated-pool-for-web-service">Create or update dedicated pool for web service</h2>
-<h3 id="path">Path</h3>
-<p>POST  /services/{name}/{version}/pool</p>
-<h3 id="description">Description</h3>
-<p>Create or update a dedicated pool for service on all compute nodes.</p>
-<blockquote>
-<p>Example Request </p>
-</blockquote>
-<pre><code class="highlight json">{
-    "<span class="hljs-attribute">InitialPoolSize</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span></span>,
-    "<span class="hljs-attribute">MaxPoolSize</span>": <span class="hljs-value"><span class="hljs-string">"integer"</span>
-</span>}
-</code></pre>
-<h3 id="method">Method</h3>
-<p>POST</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>path</strong></td>
-<td><strong>name</strong> <br><span class="property-required">required</span></td>
-<td>name of the web service.</td>
-<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-<tr>
-<td><strong>path</strong></td>
-<td><strong>version</strong> <br><span class="property-required">required</span></td>
-<td>version of the web service.</td>
-<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-<tr>
-<td><strong>body</strong></td>
-<td><strong>createOrUpdateServicePoolRequest</strong> <br><span class="property-required">required</span></td>
-<td>Create or update Service pool request details.</td>
-<td><a href="#createorupdateservicepoolrequest">CreateOrUpdateServicePoolRequest</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="responses">Responses</h3>
-<table>
-<thead>
-<tr>
-<th>HTTP Codes</th>
-<th style="text-align:center">Description</th>
-<th style="text-align:right">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>200</strong></td>
-<td style="text-align:center">Created.</td>
-<td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="errors">Errors</h3>
-<ul>
-<li><code>400</code> - Bad Request </li>
-<li><code>401</code> - Unauthorized</li>
-<li><code>403</code> - Forbidden (you are not authorized to create or update service pools)) </li>
-</ul>
-<h2 id="delete-dedicated-pool-for-service">Delete dedicated pool for Service</h2>
-<h3 id="path">Path</h3>
-<p>DELETE  /services/{name}/{version}/pool</p>
-<h3 id="description">Description</h3>
-<p>Delete a dedicated pool for service on all compute nodes.</p>
-<h3 id="method">Method</h3>
-<p>DELETE</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>path</strong></td>
-<td><strong>name</strong> <br><span class="property-required">required</span></td>
-<td>name of the web service.</td>
-<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-<tr>
-<td><strong>path</strong></td>
-<td><strong>version</strong> <br><span class="property-required">required</span></td>
-<td>version of the web service.</td>
-<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="responses">Responses</h3>
-<table>
-<thead>
-<tr>
-<th>HTTP Codes</th>
-<th style="text-align:center">Description</th>
-<th style="text-align:right">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>200</strong></td>
-<td style="text-align:center">Deleted.</td>
-<td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="errors">Errors</h3>
-<ul>
-<li><code>400</code> - Bad Request </li>
-<li><code>401</code> - Unauthorized</li>
-<li><code>403</code> - Forbidden (you are not authorized to create or update service pools)) </li>
-</ul>
-<h2 id="get-status-of-the-dedicated-pool-for-service-">Get status of the dedicated pool for service.</h2>
-<h3 id="path">Path</h3>
-<p>GET  /services/{name}/{version}/pool</p>
-<h3 id="description">Description</h3>
-<p>List status of the dedicated pools for the published web service on all ComputeNodes.</p>
-<blockquote>
-<p>Example Response &quot;<code>application/json</code>&quot;</p>
-</blockquote>
-<pre><code class="highlight json">[
-    {
-        "<span class="hljs-attribute">ComputeNodeEndpoint</span>": <span class="hljs-value"><span class="hljs-string">"http://localhost:12800"</span></span>,
-        "<span class="hljs-attribute">Status</span>": <span class="hljs-value"><span class="hljs-string">"Success"</span>
-    </span>}
-]
-</code></pre>
-<h3 id="method">Method</h3>
-<p>GET</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>path</strong></td>
-<td><strong>name</strong> <br><span class="property-required">required</span></td>
-<td>name of the web service.</td>
-<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-<tr>
-<td><strong>path</strong></td>
-<td><strong>version</strong> <br><span class="property-required">required</span></td>
-<td>version of the web service.</td>
-<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="responses">Responses</h3>
-<table>
-<thead>
-<tr>
-<th>HTTP Codes</th>
-<th style="text-align:center">Description</th>
-<th style="text-align:right">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>200</strong></td>
-<td style="text-align:center">OK</td>
-<td style="text-align:right">[ <a href="#servicepoolstatusresponse">ServicePoolStatusResponse</a> ]</td>
-</tr>
-</tbody>
-</table>
-<h3 id="errors">Errors</h3>
-<ul>
-<li><code>401</code> - Unauthorized </li>
-</ul>
 <h1 id="service-consumption-apis">Service Consumption APIs</h1>
 <p>The &#x60;service api&#x60; APIs provide operations for obtaining the &#x60;swagger&#x60; service holding and capabilities for a specific published web service. From this, analytic web service consumption can take place.</p>
 <h2 id="get-api-swagger">Get API Swagger</h2>
@@ -1475,6 +1288,54 @@
 <td><strong>200</strong></td>
 <td style="text-align:center">OK</td>
 <td style="text-align:right"><a href="#executeresponse">ExecuteResponse</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="errors">Errors</h3>
+<ul>
+<li><code>401</code> - Unauthorized</li>
+<li><code>404</code> - Not Found (session not found) </li>
+</ul>
+<h2 id="cancel-session">Cancel Session</h2>
+<h3 id="path">Path</h3>
+<p>POST  /sessions/{id}/cancel</p>
+<h3 id="description">Description</h3>
+<p>Cancel a session by aborting the current execution operation, afterwards the session will be alive and ready to accept any calls. Cancel session is <strong>not</strong> guaranteed to interrupt the execution</p>
+<h3 id="method">Method</h3>
+<p>POST</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+<th>Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>path</strong></td>
+<td><strong>id</strong> <br><span class="property-required">required</span></td>
+<td>Id of the session to cancel.</td>
+<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="responses">Responses</h3>
+<table>
+<thead>
+<tr>
+<th>HTTP Codes</th>
+<th style="text-align:center">Description</th>
+<th style="text-align:right">Schema</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td style="text-align:center">OK</td>
+<td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
 </tr>
 </tbody>
 </table>
@@ -2287,67 +2148,6 @@
 <li><code>401</code> - Unauthorized</li>
 <li><code>404</code> - Not Found (session or snapshot not found) </li>
 </ul>
-<h1 id="session-apis">Session APIs</h1>
-<p>The &#x60;sessions&#x60; APIs provide functionality for session management, which can be divided into the following groups:</p>
-<ul>
-<li>&#x60;Session lifecycle APIs&#x60; help manage the session lifecycle.</li>
-<li>&#x60;Session workspace APIs&#x60; help manage the objects in your workspace.</li>
-<li>&#x60;Session working directory APIs&#x60; help manage the files in your workspace.</li>
-<li>&#x60;Session snapshot APIs&#x60; help create and manage session snapshots. More snapshot APIs are covered in the next section.</li>
-</ul>
-<p>A session is an interactive stateful session that is run in an R or Python shell on the compute node. A session is managed by ML Server on behalf of the application.</p>
-<h2 id="cancel-session">Cancel Session</h2>
-<h3 id="path">Path</h3>
-<p>POST  /sessions/{id}/cancel</p>
-<h3 id="description">Description</h3>
-<p>Cancel a session by aborting the current execution operation, afterwards the session will be alive and ready to accept any calls. Cancel session is <strong>not</strong> guaranteed to interrupt the execution</p>
-<h3 id="method">Method</h3>
-<p>POST</p>
-<h3 id="parameters">Parameters</h3>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Name</th>
-<th>Description</th>
-<th>Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>path</strong></td>
-<td><strong>id</strong> <br><span class="property-required">required</span></td>
-<td>Id of the session to cancel.</td>
-<td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="responses">Responses</h3>
-<table>
-<thead>
-<tr>
-<th>HTTP Codes</th>
-<th style="text-align:center">Description</th>
-<th style="text-align:right">Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>200</strong></td>
-<td style="text-align:center">OK</td>
-<td style="text-align:right"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></td>
-</tr>
-</tbody>
-</table>
-<h3 id="errors">Errors</h3>
-<ul>
-<li><code>401</code> - Unauthorized</li>
-<li><code>404</code> - Not Found (session not found) </li>
-</ul>
-<h1 id="snapshot-apis">Snapshot APIs</h1>
-<p>These APIs provide different operations to access and manage workspace snapshots. A snapshot is a prepared environment image of an R or Python session saved to Microsoft ML Server. A snapshot also includes the session&#x27;s packages, objects and data files.</p>
-<p>For optimal performance, consider the size of the snapshot carefully especially when publishing a service. Before creating a snapshot, ensure that you keep only those workspace objects you need and purge the rest. And, in the event that you only need a single object, consider passing that object alone itself instead of using a snapshot. </p>
-<p>A snapshot can be loaded into any subsequent remote session for the user who created it.  For example, suppose you want to execute a script that needs three R packages, a reference data file, and a model object.   Instead of loading these items each time you want to execute the script, create a snapshot of an session containing them. Then, you can save time later by loading this snapshot using its ID to get the session contents exactly as they were at the time the snapshot was created.</p>
 <h2 id="get-snapshots">Get Snapshots</h2>
 <h3 id="path">Path</h3>
 <p>GET  /snapshots</p>
@@ -2864,11 +2664,6 @@
 <p><strong>runtimeType</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [R, Python]</span><br>Type of the runtime. <strong>Optional [Default R]</strong></p>
 <p><strong>initCode</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>Code that runs before each request. Specific to the runtime type. <strong>Optional</strong></p>
 <p><strong>outputFileNames</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></p>
-<h2 id="createorupdateservicepoolrequest">CreateOrUpdateServicePoolRequest</h2>
-<p class="schema-properties">PROPERTIES</p>
-
-<p><strong>InitialPoolSize</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">integer</a><br>Initial size of the dedicated pool. Must be equal to or greater than 0. Also must be equal to or smaller than MaxPoolSize.<strong>Optional</strong></p>
-<p><strong>MaxPoolSize</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">integer</a><br>Maximum size of the dedicated pool. Must be equal to or greter than 0. Also must be equal to or greater than InitialPoolSize.<strong>Optional</strong></p>
 <h2 id="webservice">WebService</h2>
 <p class="schema-properties">PROPERTIES</p>
 
@@ -2901,12 +2696,6 @@
 
 
 
-
-<h2 id="servicepoolstatusresponse">ServicePoolStatusResponse</h2>
-<p class="schema-properties">PROPERTIES</p>
-
-<p><strong>ComputeNodeEndpoint</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a><br>The Uri address of the Computenode.</p>
-<p><strong>Status</strong>: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a> <span class="enum">enum [Success, Pending, NotFound]</span><br>The status of the dedicate pool on the ComputeNode.</p>
 <h1 id="error-codes">Error Codes</h1>
 <aside class="notice">
 HTTP Error status code summary
